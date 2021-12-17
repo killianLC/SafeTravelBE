@@ -14,7 +14,8 @@ import java.util.Set;
 public class UserDto {
 
     private String email;
-
+    private String nom;
+    private String prenom;
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
