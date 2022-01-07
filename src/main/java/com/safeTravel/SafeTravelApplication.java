@@ -5,9 +5,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan(basePackages = {
-		"com.safeTravel.controller"
-})
 public class SafeTravelApplication {
 
 	public static void main(String[] args) {
