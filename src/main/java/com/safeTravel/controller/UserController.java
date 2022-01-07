@@ -15,8 +15,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path = "/users")
-@AllArgsConstructor
 public class UserController {
+    @Autowired
     private UserRepository userRepository;
     /**
      * GET /competences : Get all competences
