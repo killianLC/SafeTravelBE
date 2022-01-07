@@ -6,7 +6,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @ComponentScan(basePackages = {
-		"com.safeTravel"
+		"com.safeTravel.controller"
 })
 public class SafeTravelApplication {
 
