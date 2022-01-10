@@ -26,12 +26,12 @@ public interface GenericMapperCyclingAvoiding<E, D> {
         return toEntities(d, new CycleAvoidingMappingContext());
     }
 
-    D toDto(E e, CycleAvoidingMappingContext cycleAvoidingMappingContext);
+    D toDto(E e, @Context CycleAvoidingMappingContext cycleAvoidingMappingContext);
 
-    E toEntity(D d, CycleAvoidingMappingContext cycleAvoidingMappingContext);
+    E toEntity(D d, @Context CycleAvoidingMappingContext cycleAvoidingMappingContext);
 
-    List<D> toDtos(List<E> e, CycleAvoidingMappingContext cycleAvoidingMappingContext);
+    List<D> toDtos(List<E> e, @Context CycleAvoidingMappingContext cycleAvoidingMappingContext);
 
-    List<E> toEntities(List<D> d, CycleAvoidingMappingContext cycleAvoidingMappingContext);
+    List<E> toEntities(List<D> d, @Context CycleAvoidingMappingContext cycleAvoidingMappingContext);
 
 }
