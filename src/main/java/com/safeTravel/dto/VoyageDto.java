@@ -3,15 +3,11 @@ package com.safeTravel.dto;
 import java.time.LocalDate;
 import java.util.List;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
+@Getter
+@Setter
 public class VoyageDto {
     private Long id;
     private LocalDate dateDebut;
