@@ -8,7 +8,6 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Table
-@EqualsAndHashCode
 public class User {
 
     @Id

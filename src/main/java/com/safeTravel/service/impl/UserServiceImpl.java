@@ -23,7 +23,8 @@ public class UserServiceImpl implements UserService {
     /** {@inheritDoc} */
     @Override
     public List<UserDto> getAll() {
-        List u = userMapper.toDtos(userRepository.findAll());
+        List uE = userRepository.findAll();
+        List uD = userMapper.toDtos(userRepository.findAll());
         return userMapper.toDtos(userRepository.findAll());
     }
     /** {@inheritDoc} */
