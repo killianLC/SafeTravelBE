@@ -3,6 +3,7 @@ package com.safeTravel.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -26,4 +27,8 @@ public class User {
 
     @Column(nullable = false)
     private String password;
+
+    @Column
+    @OneToMany(mappedBy = "createur")
+    private Set<Voyage> voyages;
 }

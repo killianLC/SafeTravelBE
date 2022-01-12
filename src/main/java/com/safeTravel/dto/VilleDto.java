@@ -13,5 +13,4 @@ public class VilleDto {
     private String nom;
     private List<CommentaireDto> commentaireList;
     private StatistiqueDto statistiqueDto;
-
 }
