@@ -1,13 +1,14 @@
 package com.safeTravel.dto;
 
-import java.util.List;
-import java.util.Set;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import lombok.*;
-import lombok.experimental.SuperBuilder;
+import java.util.List;
 
 @Getter
 @Setter
+@NoArgsConstructor
 public class VilleDto {
     private Long id;
     private String nom;

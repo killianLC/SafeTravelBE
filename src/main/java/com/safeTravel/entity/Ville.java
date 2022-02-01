@@ -1,6 +1,5 @@
 package com.safeTravel.entity;
 
-import com.safeTravel.dto.CommentaireDto;
 import com.safeTravel.dto.StatistiqueDto;
 import lombok.Getter;
 import lombok.Setter;
@@ -24,7 +23,7 @@ public class Ville {
     @OneToMany(mappedBy = "ville")
     private Set<Etape> etapes;
     @Column
-    private List<CommentaireDto> commentaireList;
+    private List<Commentaire> commentaireList;
     @Column
     private StatistiqueDto statistiqueDto;
 }

@@ -1,12 +1,9 @@
 package com.safeTravel.entity;
 
-import com.safeTravel.dto.VilleDto;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDate;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -18,10 +15,6 @@ public class Voyage {
     @GeneratedValue
     @Column
     private Long id;
-    @Column
-    private LocalDate dateDebut;
-    @Column
-    private LocalDate dateFin;
     @Column
     @OneToMany(mappedBy = "ville")
     private Set<Etape> etapes;

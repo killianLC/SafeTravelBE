@@ -1,17 +1,20 @@
 package com.safeTravel.dto;
 
-import java.time.LocalDate;
-import java.util.List;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import lombok.*;
-import lombok.experimental.SuperBuilder;
+import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
+@NoArgsConstructor
 public class VoyageDto {
     private Long id;
-    private LocalDate dateDebut;
-    private LocalDate dateFin;
+    private Set<EtapeDto> etapes;
+    private Set<UserDto> participants;
     private List<VilleDto> villeDto;
+    private UserDto userDto;
 
 }
