@@ -15,14 +15,15 @@ public class Voyage {
     @GeneratedValue
     @Column
     private Long id;
+
     @Column
     @OneToMany(mappedBy = "ville")
     private Set<Etape> etapes;
+
     @Column
     @ManyToMany
     private Set<User> participants;
-    @Column
+
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "createur_id", referencedColumnName = "id")
     private User createur;
 }

@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -17,13 +16,15 @@ public class Ville {
     @GeneratedValue
     @Column
     private Long id;
+
     @Column
     private String nom;
+
     @Column
-    @OneToMany(mappedBy = "ville")
+    @OneToMany()
     private Set<Etape> etapes;
+
     @Column
-    private List<Commentaire> commentaireList;
-    @Column
-    private StatistiqueDto statistiqueDto;
+    @OneToMany()
+    private Set<Commentaire> commentaires;
 }

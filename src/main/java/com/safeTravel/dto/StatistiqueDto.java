@@ -11,5 +11,5 @@ import lombok.experimental.SuperBuilder;
 @Data
 public class StatistiqueDto {
     private Set<CritereDto> criteresDto;
-    private double noteSafeTravel;
+    private Double noteSafeTravel;
 }

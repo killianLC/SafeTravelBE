@@ -29,6 +29,6 @@ public class User {
     private String password;
 
     @Column
-    @OneToMany(mappedBy = "createur")
+    @OneToMany(mappedBy = "createur", fetch = FetchType.LAZY)
     private Set<Voyage> voyages;
 }
