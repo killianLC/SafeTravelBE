@@ -71,18 +71,23 @@ public class AuthController {
 
         try {
             // Create new user's account
-            User user = new User(signUpRequest.getPrenom(), signUpRequest.getNom(), signUpRequest.getEmail(), encoder.encode(signUpRequest.getPassword()));
+            User user = User.builder()
+                    .prenom(signUpRequest.getPrenom())
+                    .nom(signUpRequest.getNom())
+                    .email(signUpRequest.getEmail())
+                    .password(signUpRequest.getPassword())
+                    .build();
 
-            Set<Role> roles = new HashSet<>();
             Role userRole = roleRepository.findByName("USER")
                     .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
 
-            roles.add(userRole);
-            user.setRoles(roles);
+
+            userRole.getUsers().add(user);
 
             userRepository.save(user);
+            roleRepository.save(userRole);
         } catch (Exception e) {
-            return ResponseEntity.status(400).body(new MessageResponse("Error: User not registered!"));
+            return ResponseEntity.badRequest().body(new MessageResponse("Error: Registration not valid!"));
         }
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));

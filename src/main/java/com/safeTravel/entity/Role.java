@@ -19,6 +19,9 @@ public class Role {
     @Column(nullable = false)
     private String name;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name="user_role",
+            joinColumns = @JoinColumn(name="role_id"),
+            inverseJoinColumns = @JoinColumn(name="user_id"))
     private Set<User> users;
 }

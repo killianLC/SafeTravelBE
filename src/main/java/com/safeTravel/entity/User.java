@@ -8,6 +8,9 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Table
 public class User {
     @Id
@@ -28,20 +31,10 @@ public class User {
     private String password;
 
     @Column
-    @OneToMany()
+    @ManyToMany(mappedBy = "users")
     private Set<Role> roles;
 
     @Column
     @OneToMany(mappedBy = "createur", fetch = FetchType.LAZY)
     private Set<Voyage> voyages;
-
-    public User() {
-    }
-
-    public User(String prenom, String nom, String email, String encodedPassword) {
-        this.prenom = prenom;
-        this.nom = nom;
-        this.email = email;
-        this.password = encodedPassword;
-    }
 }
