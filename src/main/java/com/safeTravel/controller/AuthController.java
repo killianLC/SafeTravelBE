@@ -1,8 +1,6 @@
 package com.safeTravel.controller;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.safeTravel.entity.Role;
@@ -13,8 +11,11 @@ import com.safeTravel.payload.response.JwtResponse;
 import com.safeTravel.payload.response.MessageResponse;
 import com.safeTravel.repository.RoleRepository;
 import com.safeTravel.repository.UserRepository;
+import com.safeTravel.security.jwt.AuthEntryPointJwt;
 import com.safeTravel.security.jwt.JwtUtils;
 import com.safeTravel.security.services.UserDetailsImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -32,6 +33,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
+    private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
+
     @Autowired
     AuthenticationManager authenticationManager;
 
@@ -58,6 +61,7 @@ public class AuthController {
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
         List<String> roles = userDetails.getAuthorities().stream().map(item -> item.getAuthority()).collect(Collectors.toList());
 
+        logger.info("New user authanticate: " + loginRequest.getEmail());
         return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getId(), userDetails.getEmail(), roles));
     }
 
@@ -75,7 +79,7 @@ public class AuthController {
                     .prenom(signUpRequest.getPrenom())
                     .nom(signUpRequest.getNom())
                     .email(signUpRequest.getEmail())
-                    .password(signUpRequest.getPassword())
+                    .password(encoder.encode(signUpRequest.getPassword()))
                     .build();
 
             Role userRole = roleRepository.findByName("USER")
@@ -90,6 +94,7 @@ public class AuthController {
             return ResponseEntity.badRequest().body(new MessageResponse("Error: Registration not valid!"));
         }
 
+        logger.info("New user registred: " + signUpRequest.getEmail());
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
 }
