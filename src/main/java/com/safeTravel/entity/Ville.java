@@ -1,6 +1,5 @@
 package com.safeTravel.entity;
 
-import com.safeTravel.dto.StatistiqueDto;
 import lombok.Getter;
 import lombok.Setter;
 
