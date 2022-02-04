@@ -2,9 +2,11 @@ package com.safeTravel.service.impl;
 
 import com.safeTravel.dto.CityDto;
 import com.safeTravel.service.CityService;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class CityServiceImpl implements CityService {
     @Override
     public List<CityDto> getAll() {

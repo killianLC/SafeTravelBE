@@ -8,7 +8,6 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Table
@@ -37,4 +36,11 @@ public class User {
     @Column
     @OneToMany(mappedBy = "organizer", fetch = FetchType.LAZY)
     private Set<Trip> trips;
+
+    public User(String firstname, String lastname, String email, String password) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.email = email;
+        this.password = password;
+    }
 }
