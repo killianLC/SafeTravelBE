@@ -1,11 +1,9 @@
 package com.safeTravel.service.impl;
 
 import com.safeTravel.dto.UserDto;
-import com.safeTravel.entity.User;
 import com.safeTravel.mapper.referentiel.UserMapper;
 import com.safeTravel.repository.UserRepository;
 import com.safeTravel.service.UserService;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +15,7 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserMapper userMapper;
+
     @Autowired
     private UserRepository userRepository;
 
