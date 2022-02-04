@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping({"/cities"})
+@RequestMapping({"/city"})
 public class CityController {
     private static final Logger logger = LoggerFactory.getLogger(CityController.class);
 
@@ -28,11 +28,11 @@ public class CityController {
      *
      * @return List<CityDto> of the cities contains in database
      */
-    @GetMapping({"/"})
+    @GetMapping({"/cities"})
     @ResponseStatus(HttpStatus.OK)
     public List<CityDto> getAll() {
         List<CityDto> cities = cityService.getAll();
-        logger.debug("City, getAll() :{}", cities);
+        logger.info("City, getAll() :{}", cities);
         return cities;
     }
 

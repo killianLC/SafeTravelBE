@@ -4,11 +4,13 @@ import com.safeTravel.dto.CityDto;
 import com.safeTravel.mapper.referentiel.CityMapper;
 import com.safeTravel.repository.CityRepository;
 import com.safeTravel.service.CityService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Slf4j
 @Service
 public class CityServiceImpl implements CityService {
 
@@ -20,8 +22,6 @@ public class CityServiceImpl implements CityService {
 
     @Override
     public List<CityDto> getAll() {
-        List uE = cityRepository.findAll();
-        List uD = cityMapper.toDtos(cityRepository.findAll());
         return cityMapper.toDtos(cityRepository.findAll());
     }
 
