@@ -11,7 +11,8 @@ import lombok.Setter;
 @NoArgsConstructor
 public class CommentDto {
     private Long id;
+    private String description;
+    private float rating;
     private UserDto userDto;
     private CityDto cityDto;
-    private float rating;
 }

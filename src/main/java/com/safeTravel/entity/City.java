@@ -20,10 +20,6 @@ public class City {
     private String name;
 
     @Column
-    @OneToMany()
-    private Set<Step> steps;
-
-    @Column
-    @OneToMany()
+    @OneToMany(mappedBy = "city", fetch = FetchType.LAZY)
     private Set<Comment> comments;
 }
