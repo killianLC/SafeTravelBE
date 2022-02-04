@@ -1,16 +1,28 @@
 package com.safeTravel.service.impl;
 
 import com.safeTravel.dto.CityDto;
+import com.safeTravel.mapper.referentiel.CityMapper;
+import com.safeTravel.repository.CityRepository;
 import com.safeTravel.service.CityService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class CityServiceImpl implements CityService {
+
+    @Autowired
+    private CityMapper cityMapper;
+
+    @Autowired
+    private CityRepository cityRepository;
+
     @Override
     public List<CityDto> getAll() {
-        return null;
+        List uE = cityRepository.findAll();
+        List uD = cityMapper.toDtos(cityRepository.findAll());
+        return cityMapper.toDtos(cityRepository.findAll());
     }
 
     @Override
@@ -35,6 +47,6 @@ public class CityServiceImpl implements CityService {
 
     @Override
     public CityDto getByName(String name) {
-        return null;
+        return cityMapper.toDto(cityRepository.findByName(name));
     }
 }
