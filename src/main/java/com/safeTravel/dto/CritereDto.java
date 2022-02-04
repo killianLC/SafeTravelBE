@@ -9,7 +9,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class CritereDto {
     private Long id;
-    private String nom;
+    private String name;
     private Double score;
-    private VilleDto villeDto;
+    private CityDto cityDto;
 }

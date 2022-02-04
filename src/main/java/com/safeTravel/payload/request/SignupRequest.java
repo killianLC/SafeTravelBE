@@ -3,26 +3,26 @@ package com.safeTravel.payload.request;
 import java.util.Set;
 
 public class SignupRequest {
-    private String prenom;
-    private String nom;
+    private String firstname;
+    private String lastname;
     private String email;
     private String password;
     private Set<String> role;
 
-    public String getPrenom() {
-        return prenom;
+    public String getFirstname() {
+        return firstname;
     }
 
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
     }
 
-    public String getNom() {
-        return nom;
+    public String getLastname() {
+        return lastname;
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
     public String getEmail() {

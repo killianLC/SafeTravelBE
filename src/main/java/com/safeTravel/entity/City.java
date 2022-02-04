@@ -10,20 +10,20 @@ import java.util.Set;
 @Setter
 @Entity
 @Table
-public class Ville {
+public class City {
     @Id
     @GeneratedValue
     @Column
     private Long id;
 
     @Column
-    private String nom;
+    private String name;
 
     @Column
     @OneToMany()
-    private Set<Etape> etapes;
+    private Set<Step> steps;
 
     @Column
     @OneToMany()
-    private Set<Commentaire> commentaires;
+    private Set<Comment> comments;
 }

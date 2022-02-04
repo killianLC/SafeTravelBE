@@ -10,21 +10,21 @@ import java.time.LocalDate;
 @Setter
 @Table
 @Entity
-public class Etape {
+public class Step {
     @Id
     @GeneratedValue
     @Column
     private Long id;
 
     @Column
-    private LocalDate dateDebut;
+    private LocalDate startDate;
 
     @Column
-    private LocalDate dateFin;
+    private LocalDate endDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private Ville ville;
+    private City city;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private Voyage voyage;
+    private Trip trip;
 }

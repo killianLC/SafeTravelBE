@@ -19,12 +19,12 @@ public class User {
     private Long id;
 
     @Column(nullable = false)
-    private String prenom;
+    private String firstname;
 
     @Column(nullable = false)
-    private String nom;
+    private String lastname;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String email;
 
     @Column(nullable = false)
@@ -35,6 +35,6 @@ public class User {
     private Set<Role> roles;
 
     @Column
-    @OneToMany(mappedBy = "createur", fetch = FetchType.LAZY)
-    private Set<Voyage> voyages;
+    @OneToMany(mappedBy = "organizer", fetch = FetchType.LAZY)
+    private Set<Trip> trips;
 }

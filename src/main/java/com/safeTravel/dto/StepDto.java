@@ -9,10 +9,10 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @NoArgsConstructor
-public class EtapeDto {
+public class StepDto {
     private Long id;
-    private LocalDate dateDebut;
-    private LocalDate dateFin;
-    private VilleDto villeDto;
-    private VoyageDto voyageDto;
+    private LocalDate startDate;
+    private LocalDate endDate;
+    private CityDto cityDto;
+    private TripDto tripDto;
 }

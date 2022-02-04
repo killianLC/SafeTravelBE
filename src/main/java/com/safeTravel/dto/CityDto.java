@@ -9,9 +9,9 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-public class VilleDto {
+public class CityDto {
     private Long id;
-    private String nom;
-    private List<CommentaireDto> commentaireList;
-    private StatistiqueDto statistiqueDto;
+    private String name;
+    private List<CommentDto> commentsDto;
+    private StatisticDto statisticDto;
 }

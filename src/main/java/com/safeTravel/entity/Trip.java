@@ -10,20 +10,20 @@ import java.util.Set;
 @Getter
 @Setter
 @Table
-public class Voyage {
+public class Trip {
     @Id
     @GeneratedValue
     @Column
     private Long id;
 
     @Column
-    @OneToMany(mappedBy = "ville")
-    private Set<Etape> etapes;
+    @OneToMany(mappedBy = "city")
+    private Set<Step> steps;
 
     @Column
     @ManyToMany
-    private Set<User> participants;
+    private Set<User> attendees;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private User createur;
+    private User organizer;
 }

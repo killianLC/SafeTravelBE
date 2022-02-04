@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Table
-public class Commentaire {
+public class Comment {
     @Id
     @GeneratedValue
     @Column

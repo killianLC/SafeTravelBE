@@ -10,7 +10,7 @@ import java.util.Set;
 @Getter
 @Setter
 @Table
-public class Statistique {
+public class Statistic {
     @Id
     @GeneratedValue
     @Column

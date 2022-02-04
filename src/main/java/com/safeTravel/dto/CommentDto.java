@@ -4,17 +4,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-import java.util.Set;
-
 @Getter
 @Setter
 @NoArgsConstructor
-public class VoyageDto {
+public class CommentDto {
     private Long id;
-    private Set<EtapeDto> etapes;
-    private Set<UserDto> participants;
-    private List<VilleDto> villeDto;
     private UserDto userDto;
-
+    private CityDto cityDto;
+    private float rating;
 }

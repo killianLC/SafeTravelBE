@@ -12,10 +12,10 @@ import java.util.Set;
 @NoArgsConstructor
 public class UserDto {
     private Long id;
+    private String firstname;
+    private String lastname;
     private String email;
-    private String nom;
-    private String prenom;
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
-    private Set<VoyageDto> voyageDtoSet;
+    private Set<TripDto> tripsDto;
 }

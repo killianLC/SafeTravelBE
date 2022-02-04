@@ -18,9 +18,9 @@ public class Critere {
 
     @Column
     @OneToMany()
-    private Set<Etape> etapes;
+    private Set<Step> steps;
 
     @Column
     @OneToMany()
-    private Set<Statistique> statistiques;
+    private Set<Statistic> statistics;
 }

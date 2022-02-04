@@ -3,6 +3,8 @@ package com.safeTravel.controller;
 import com.safeTravel.dto.UserDto;
 import com.safeTravel.service.UserService;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -11,8 +13,9 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@RequestMapping({"/users"})
+@RequestMapping("/users")
 public class UserController {
+    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     private final UserService userService;
 
@@ -30,7 +33,7 @@ public class UserController {
     @ResponseStatus(HttpStatus.FOUND)
     public UserDto getById(@PathVariable("id") Long id) {
         UserDto u = userService.getById(id);
-        log.debug("User, getById() :{}", u);
+        logger.debug("User, getById() :{}", u);
         return u;
     }
 
@@ -43,7 +46,7 @@ public class UserController {
     @ResponseStatus(HttpStatus.OK)
     public List<UserDto> getAll() {
         List<UserDto> u = userService.getAll();
-        log.debug("User, getAll() :{}", u);
+        logger.debug("User, getAll() :{}", u);
         return u;
     }
 
@@ -56,7 +59,7 @@ public class UserController {
     @ResponseStatus(HttpStatus.CREATED)
     public UserDto create(@RequestBody UserDto userDto) {
         UserDto u = userService.create(userDto);
-        log.debug("User, create() :{}", u);
+        logger.debug("User, create() :{}", u);
         return u;
     }
 
@@ -69,7 +72,7 @@ public class UserController {
     @ResponseStatus(HttpStatus.OK)
     public UserDto update(@RequestBody UserDto userDto) {
         UserDto u = userService.update(userDto);
-        log.debug("User, update() :{}", u);
+        logger.debug("User, update() :{}", u);
         return u;
     }
 
@@ -81,8 +84,7 @@ public class UserController {
     @DeleteMapping({"/{id}"})
     @ResponseStatus(HttpStatus.OK)
     public void delete(@PathVariable("id") Long id) {
-        log.debug("User, delete() :{}", id);
+        logger.debug("User, delete() :{}", id);
         userService.deleteById(id);
     }
-
 }
