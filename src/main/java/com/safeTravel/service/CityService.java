@@ -7,4 +7,6 @@ import javax.transaction.Transactional;
 @Transactional
 public interface CityService extends ServiceShared<CityDto, Long> {
     CityDto getByName(String name);
+
+    Double getRatingAverageByName(String name);
 }
