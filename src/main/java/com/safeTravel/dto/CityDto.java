@@ -5,13 +5,16 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+import java.util.Set;
+
 @Data
 @Getter
 @Setter
 @NoArgsConstructor
-public class CritereDto {
+public class CityDto {
     private Long id;
     private String name;
-    private Double score;
-    private CityDto cityDto;
+    private Set<CommentDto> commentsDto;
+    private StatisticDto statisticDto;
 }

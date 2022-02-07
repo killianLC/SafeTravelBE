@@ -1,0 +1,2 @@
+INSERT INTO role (id, name) VALUES (1, 'ADMIN') ON DUPLICATE KEY UPDATE name = 'ADMIN';
+INSERT INTO role (id, name) VALUES (2, 'USER') ON DUPLICATE KEY UPDATE name = 'USER';

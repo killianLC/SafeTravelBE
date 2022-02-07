@@ -5,13 +5,17 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Set;
+
 @Data
 @Getter
 @Setter
 @NoArgsConstructor
-public class CritereDto {
+public class TripDto {
     private Long id;
-    private String name;
-    private Double score;
-    private CityDto cityDto;
+    private Set<StepDto> steps;
+    private Set<UserDto> participants;
+    private Set<CityDto> citiesDto;
+    private UserDto userDto;
+
 }

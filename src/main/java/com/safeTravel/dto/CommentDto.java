@@ -9,9 +9,10 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class CritereDto {
+public class CommentDto {
     private Long id;
-    private String name;
-    private Double score;
+    private String description;
+    private float rating;
+    private UserDto userDto;
     private CityDto cityDto;
 }
