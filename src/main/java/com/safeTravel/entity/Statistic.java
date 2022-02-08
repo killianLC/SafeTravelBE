@@ -20,10 +20,9 @@ public class Statistic {
     private String name;
 
     @JoinColumn
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     private City city;
 
-    @Column
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "statistic", fetch = FetchType.LAZY)
     private Set<Criterion> criteria;
 }

@@ -1,6 +1,9 @@
 package com.safeTravel.entity;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -29,13 +32,17 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    @JoinColumn
-    @ManyToMany(mappedBy = "users")
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "user_role",
+            joinColumns = @JoinColumn(name = "role_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id"))
     private Set<Role> roles;
 
-    @JoinColumn
-    @ManyToMany(mappedBy = "users", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private Set<Travel> travels;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private Set<Comment> comments;
 
     public User(String firstname, String lastname, String email, String password) {
         this.firstname = firstname;

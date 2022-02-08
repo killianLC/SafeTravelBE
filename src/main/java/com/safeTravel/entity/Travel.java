@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
 @Getter
@@ -16,14 +15,11 @@ public class Travel {
     @Column
     private Long id;
 
-    @JoinColumn
-    @OneToOne()
+    @JoinColumn(name = "trip_id")
+    @ManyToOne
     private Trip trip;
 
-    @Column
-    @ManyToMany(mappedBy = "travels")
-    private Set<User> users;
-
-    @Column
-    private Boolean isOrganizer;
+    @JoinColumn(name = "user_id")
+    @ManyToOne
+    private User user;
 }

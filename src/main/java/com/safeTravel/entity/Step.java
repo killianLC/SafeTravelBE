@@ -25,9 +25,11 @@ public class Step {
     @Column
     private int stepNumber;
 
+    @JoinColumn
     @ManyToOne(fetch = FetchType.LAZY)
     private City city;
 
+    @JoinColumn
     @ManyToOne(fetch = FetchType.LAZY)
     private Trip trip;
 }
