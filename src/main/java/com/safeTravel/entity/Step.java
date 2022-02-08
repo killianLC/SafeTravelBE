@@ -22,6 +22,9 @@ public class Step {
     @Column
     private LocalDate endDate;
 
+    @Column
+    private int stepNumber;
+
     @ManyToOne(fetch = FetchType.LAZY)
     private City city;
 

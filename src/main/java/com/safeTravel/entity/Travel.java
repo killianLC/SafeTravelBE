@@ -10,17 +10,20 @@ import java.util.Set;
 @Getter
 @Setter
 @Table
-public class Critere {
+public class Travel {
     @Id
     @GeneratedValue
     @Column
     private Long id;
 
-    @Column
-    @OneToMany()
-    private Set<Step> steps;
+    @JoinColumn
+    @OneToOne()
+    private Trip trip;
 
     @Column
-    @OneToMany()
-    private Set<Statistic> statistics;
+    @ManyToMany(mappedBy = "travels")
+    private Set<User> users;
+
+    @Column
+    private Boolean isOrganizer;
 }

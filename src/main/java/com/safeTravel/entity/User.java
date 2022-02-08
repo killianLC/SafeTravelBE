@@ -29,13 +29,13 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    @Column
+    @JoinColumn
     @ManyToMany(mappedBy = "users")
     private Set<Role> roles;
 
-    @Column
-    @OneToMany(mappedBy = "organizer", fetch = FetchType.LAZY)
-    private Set<Trip> trips;
+    @JoinColumn
+    @ManyToMany(mappedBy = "users", fetch = FetchType.LAZY)
+    private Set<Travel> travels;
 
     public User(String firstname, String lastname, String email, String password) {
         this.firstname = firstname;

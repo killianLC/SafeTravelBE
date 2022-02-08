@@ -10,7 +10,7 @@ import java.util.Set;
 @Getter
 @Setter
 @Table
-public class Statistic {
+public class Criterion {
     @Id
     @GeneratedValue
     @Column
@@ -19,11 +19,10 @@ public class Statistic {
     @Column
     private String name;
 
-    @JoinColumn
-    @OneToOne(fetch = FetchType.LAZY)
-    private City city;
-
     @Column
-    @OneToMany(fetch = FetchType.LAZY)
-    private Set<Criterion> criteria;
+    private Double rating;
+
+    @JoinColumn
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Statistic statistic;
 }

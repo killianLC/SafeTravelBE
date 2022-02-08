@@ -16,14 +16,11 @@ public class Trip {
     @Column
     private Long id;
 
+    @JoinColumn
+    @OneToOne(mappedBy = "trip")
+    private Travel travel;
+
     @Column
     @OneToMany(mappedBy = "city")
     private Set<Step> steps;
-
-    @Column
-    @ManyToMany
-    private Set<User> attendees;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    private User organizer;
 }

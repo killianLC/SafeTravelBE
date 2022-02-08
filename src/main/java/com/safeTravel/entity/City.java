@@ -22,4 +22,8 @@ public class City {
     @Column
     @OneToMany(mappedBy = "city", fetch = FetchType.LAZY)
     private Set<Comment> comments;
+
+    @Column
+    @OneToMany(mappedBy = "city", fetch = FetchType.LAZY)
+    private Set<Step> steps;
 }

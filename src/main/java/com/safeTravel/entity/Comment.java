@@ -23,6 +23,10 @@ public class Comment {
     private double rating;
 
     @JoinColumn
+    @OneToOne(fetch = FetchType.LAZY)
+    private User user;
+
+    @JoinColumn
     @ManyToOne(fetch = FetchType.LAZY)
     private City city;
 }
