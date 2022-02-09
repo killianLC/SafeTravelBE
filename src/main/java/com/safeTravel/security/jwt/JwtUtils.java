@@ -16,7 +16,7 @@ public class JwtUtils {
     private String jwtSecret = "safeTravelSecretKey";
 
     // 5 Minutes
-    private int jwtExpirationMs = 300000;
+    private int jwtExpirationMs = 30000000;
 
     public String generateJwtToken(Authentication authentication) {
 

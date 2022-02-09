@@ -1,9 +1,7 @@
 package com.safeTravel.controller;
 
 import com.safeTravel.dto.CityDto;
-import com.safeTravel.dto.UserDto;
 import com.safeTravel.service.CityService;
-import org.apache.coyote.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

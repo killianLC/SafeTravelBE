@@ -7,4 +7,5 @@ import java.util.List;
 @Transactional
 public interface CommentService extends ServiceShared<CommentDto, Long> {
     List<CommentDto> getAll();
+    List<CommentDto> getCommentsByUserId(Long id);
 }

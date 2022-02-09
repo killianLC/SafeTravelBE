@@ -44,4 +44,8 @@ public class CommentServiceImpl implements com.safeTravel.service.CommentService
     public void deleteById(Long id) {
 
     }
+
+    public List<CommentDto> getCommentsByUserId(Long id) {
+        return commentMapper.toDtos(commentRepository.getCommentsByUserId(id));
+    }
 }
