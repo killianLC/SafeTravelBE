@@ -27,22 +27,22 @@ public class CommentServiceImpl implements com.safeTravel.service.CommentService
 
     @Override
     public CommentDto getById(Long id) {
-        return null;
+        return commentMapper.toDto(commentRepository.getById(id));
     }
 
     @Override
     public CommentDto create(CommentDto dto) {
-        return null;
+        return commentMapper.toDto(commentRepository.save(commentMapper.toEntity(dto)));
     }
 
     @Override
     public CommentDto update(CommentDto dto) {
-        return null;
+        return commentMapper.toDto(commentRepository.save(commentMapper.toEntity(dto)));
     }
 
     @Override
     public void deleteById(Long id) {
-
+        commentRepository.deleteById(id);
     }
 
     public List<CommentDto> getCommentsByUserId(Long id) {

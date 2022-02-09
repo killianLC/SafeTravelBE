@@ -15,7 +15,7 @@ public class StepDto {
     private Long id;
     private LocalDate startDate;
     private LocalDate endDate;
-    private int stepNumber;
-    private CityDto cityDto;
-    private TripDto tripDto;
+    private Integer stepNumber;
+    private CityDto city;
+    private TripDto trip;
 }

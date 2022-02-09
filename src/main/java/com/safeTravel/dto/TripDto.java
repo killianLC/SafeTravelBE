@@ -14,7 +14,6 @@ import java.util.Set;
 public class TripDto {
     private Long id;
     private UserDto organizer;
-    private Set<UserDto> attendees;
     private Set<StepDto> steps;
-
+    private Set<TravelDto> travels;
 }

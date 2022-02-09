@@ -1,7 +1,9 @@
 package com.safeTravel.dto;
 
-import com.safeTravel.entity.User;
-import lombok.*;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.Set;
 
@@ -12,5 +14,5 @@ import java.util.Set;
 public class RoleDto {
     private Long id;
     private String name;
-    private Set<User> users;
+    private Set<UserDto> users;
 }

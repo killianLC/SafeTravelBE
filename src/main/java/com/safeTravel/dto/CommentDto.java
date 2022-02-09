@@ -13,6 +13,6 @@ public class CommentDto {
     private Long id;
     private String description;
     private float rating;
-    private UserDto userDto;
-    private CityDto cityDto;
+    private UserDto user;
+    private CityDto city;
 }

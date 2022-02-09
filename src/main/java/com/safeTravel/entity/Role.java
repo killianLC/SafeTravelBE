@@ -14,7 +14,7 @@ public class Role {
     @Id
     @GeneratedValue
     @Column
-    private Integer id;
+    private Long id;
 
     @Column(nullable = false)
     private String name;

@@ -9,9 +9,10 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class CriterionDto {
+public class TravelDto {
     private Long id;
-    private String name;
-    private Double rating;
-    private StatisticDto statistic;
+
+    private TripDto trip;
+
+    private UserDto user;
 }
