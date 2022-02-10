@@ -4,23 +4,22 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
 @Getter
 @Setter
 @Table
-public class Critere {
+public class Travel {
     @Id
     @GeneratedValue
     @Column
     private Long id;
 
-    @Column
-    @OneToMany()
-    private Set<Step> steps;
+    @JoinColumn(name = "trip_id")
+    @ManyToOne
+    private Trip trip;
 
-    @Column
-    @OneToMany()
-    private Set<Statistic> statistics;
+    @JoinColumn(name = "user_id")
+    @ManyToOne
+    private User user;
 }

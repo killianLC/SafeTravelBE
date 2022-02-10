@@ -4,32 +4,25 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.util.Set;
 
+@Entity
 @Getter
 @Setter
 @Table
-@Entity
-public class Step {
+public class Criterion {
     @Id
     @GeneratedValue
     @Column
     private Long id;
 
     @Column
-    private LocalDate startDate;
+    private String name;
 
     @Column
-    private LocalDate endDate;
-
-    @Column
-    private Integer stepNumber;
+    private Double rating;
 
     @JoinColumn
     @ManyToOne(fetch = FetchType.LAZY)
-    private City city;
-
-    @JoinColumn
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Trip trip;
+    private Statistic statistic;
 }

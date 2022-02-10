@@ -1,11 +1,11 @@
 package com.safeTravel.dto;
 
+import com.safeTravel.entity.Step;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
 import java.util.Set;
 
 @Data
@@ -15,6 +15,7 @@ import java.util.Set;
 public class CityDto {
     private Long id;
     private String name;
-    private Set<CommentDto> commentsDto;
-    private StatisticDto statisticDto;
+    private Set<CommentDto> comments;
+    private Set<Step> steps;
+    private StatisticDto statistic;
 }

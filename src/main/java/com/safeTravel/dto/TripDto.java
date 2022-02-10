@@ -13,9 +13,7 @@ import java.util.Set;
 @NoArgsConstructor
 public class TripDto {
     private Long id;
+    private UserDto organizer;
     private Set<StepDto> steps;
-    private Set<UserDto> participants;
-    private Set<CityDto> citiesDto;
-    private UserDto userDto;
-
+    private Set<TravelDto> travels;
 }

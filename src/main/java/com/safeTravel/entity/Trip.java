@@ -11,19 +11,18 @@ import java.util.Set;
 @Setter
 @Table
 public class Trip {
+
     @Id
     @GeneratedValue
     @Column
     private Long id;
 
     @Column
-    @OneToMany(mappedBy = "city")
+    private String description;
+
+    @OneToMany(mappedBy = "trip", fetch = FetchType.LAZY)
     private Set<Step> steps;
 
-    @Column
-    @ManyToMany
-    private Set<User> attendees;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    private User organizer;
+    @OneToMany(mappedBy = "trip", fetch = FetchType.LAZY)
+    private Set<Travel> travels;
 }

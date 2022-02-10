@@ -17,9 +17,12 @@ public class Statistic {
     private Long id;
 
     @Column
-    private Double noteSafeTravel;
+    private String name;
 
-    @Column
-    @OneToMany(fetch = FetchType.LAZY)
-    private Set<Critere> criteres;
+    @JoinColumn
+    @ManyToOne(fetch = FetchType.LAZY)
+    private City city;
+
+    @OneToMany(mappedBy = "statistic", fetch = FetchType.LAZY)
+    private Set<Criterion> criteria;
 }

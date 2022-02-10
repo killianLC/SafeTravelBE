@@ -8,16 +8,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Slf4j
 @Service
 public class CityServiceImpl implements CityService {
-
-    @PersistenceContext
-    EntityManager entityManager;
 
     @Autowired
     private CityMapper cityMapper;
@@ -32,22 +27,22 @@ public class CityServiceImpl implements CityService {
 
     @Override
     public CityDto getById(Long id) {
-        return null;
+        return cityMapper.toDto(cityRepository.getById(id));
     }
 
     @Override
     public CityDto create(CityDto dto) {
-        return null;
+        return cityMapper.toDto(cityRepository.save(cityMapper.toEntity(dto)));
     }
 
     @Override
     public CityDto update(CityDto dto) {
-        return null;
+        return cityMapper.toDto(cityRepository.save(cityMapper.toEntity(dto)));
     }
 
     @Override
     public void deleteById(Long id) {
-
+        cityRepository.deleteById(id);
     }
 
     @Override
