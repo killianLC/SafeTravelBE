@@ -46,7 +46,6 @@ public class CityController {
     @ResponseStatus(HttpStatus.OK)
     public CityDto getByName(@PathVariable("name") String name) {
         CityDto cityDto = cityService.getByName(name);
-        logger.debug("City, getByName() :{}", name);
         return cityDto;
     }
 
@@ -68,11 +67,5 @@ public class CityController {
 
         logger.debug("City, getAverageByName() :{}", name);
         return response;
-    }
-
-    @GetMapping({"/top10"})
-    @ResponseStatus(HttpStatus.OK)
-    public List<CityClassementDto> getTop10OrderByDesc() {
-        return cityService.getTop10ByNotesDesc();
     }
 }
