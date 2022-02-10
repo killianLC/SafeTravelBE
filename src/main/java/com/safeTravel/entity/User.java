@@ -38,11 +38,14 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "user_id"))
     private Set<Role> roles;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    private Set<Travel> travels;
+    @OneToMany(mappedBy = "organisateur", fetch = FetchType.LAZY)
+    private Set<Trip> trips;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private Set<Comment> comments;
+
+    @OneToMany(fetch = FetchType.LAZY)
+    private Set<City> favoris;
 
     public User(String firstname, String lastname, String email, String password) {
         this.firstname = firstname;

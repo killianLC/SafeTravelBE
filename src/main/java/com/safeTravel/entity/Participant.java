@@ -9,17 +9,20 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Table
-public class Travel {
+public class Participant {
     @Id
     @GeneratedValue
     @Column
     private Long id;
 
+    @JoinColumn(name = "user_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private User user;
+
     @JoinColumn(name = "trip_id")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Trip trip;
 
-    @JoinColumn(name = "user_id")
-    @ManyToOne
-    private User user;
+    @Column
+    private Boolean statut = false;
 }

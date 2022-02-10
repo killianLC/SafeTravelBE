@@ -19,10 +19,6 @@ public class Criterion {
     @Column
     private String name;
 
-    @Column
-    private Double rating;
-
-    @JoinColumn
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Statistic statistic;
+    @OneToMany(mappedBy = "criterion", fetch = FetchType.LAZY)
+    private Set<Note> notes;
 }

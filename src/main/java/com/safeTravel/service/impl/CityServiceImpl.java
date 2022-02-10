@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @Slf4j
 @Service
@@ -54,4 +55,7 @@ public class CityServiceImpl implements CityService {
     public Double getRatingAverageByName(String name) {
         return cityRepository.getRatingAverageByName(name);
     }
+
+    @Override
+    public List<CityDto> getTop10ByNotesDesc() { return cityMapper.toDtos(cityRepository.findTop10ByOrderByNotesDesc()); }
 }

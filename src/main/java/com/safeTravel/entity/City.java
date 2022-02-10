@@ -23,8 +23,5 @@ public class City {
     private Set<Comment> comments;
 
     @OneToMany(mappedBy = "city", fetch = FetchType.LAZY)
-    private Set<Step> steps;
-
-    @OneToMany(mappedBy = "city", fetch = FetchType.LAZY)
     private Set<Statistic> statistics;
 }

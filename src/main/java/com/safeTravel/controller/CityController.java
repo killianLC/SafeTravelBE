@@ -68,4 +68,10 @@ public class CityController {
         logger.debug("City, getAverageByName() :{}", name);
         return response;
     }
+
+    @GetMapping({"/top10"})
+    @ResponseStatus(HttpStatus.OK)
+    public List<CityDto> getTop10OrderByDesc() {
+        return cityService.getTop10ByNotesDesc();
+    }
 }

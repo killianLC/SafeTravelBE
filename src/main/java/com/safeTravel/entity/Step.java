@@ -17,13 +17,7 @@ public class Step {
     private Long id;
 
     @Column
-    private LocalDate startDate;
-
-    @Column
-    private LocalDate endDate;
-
-    @Column
-    private Integer stepNumber;
+    private LocalDate date;
 
     @JoinColumn
     @ManyToOne(fetch = FetchType.LAZY)

@@ -4,25 +4,27 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.time.LocalDate;
 
 @Entity
 @Getter
 @Setter
 @Table
-public class Statistic {
+public class Note {
     @Id
     @GeneratedValue
     @Column
     private Long id;
 
     @Column
-    private String name;
+    private Double note;
 
-    @JoinColumn
+    @Column
+    private LocalDate date;
+
     @ManyToOne(fetch = FetchType.LAZY)
     private City city;
 
-    @OneToMany(mappedBy = "statistic", fetch = FetchType.LAZY)
-    private Set<Criterion> criteria;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Criterion criterion;
 }

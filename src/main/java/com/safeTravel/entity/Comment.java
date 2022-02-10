@@ -19,7 +19,7 @@ public class Comment {
     private String description;
 
     @Column
-    private double rating;
+    private Double rating;
 
     @JoinColumn
     @ManyToOne(fetch = FetchType.LAZY)
