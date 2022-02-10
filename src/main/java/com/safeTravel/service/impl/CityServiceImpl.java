@@ -1,11 +1,13 @@
 package com.safeTravel.service.impl;
 
+import com.safeTravel.dto.CityClassementDto;
 import com.safeTravel.dto.CityDto;
 import com.safeTravel.mapper.referentiel.CityMapper;
 import com.safeTravel.repository.CityRepository;
 import com.safeTravel.service.CityService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -57,5 +59,5 @@ public class CityServiceImpl implements CityService {
     }
 
     @Override
-    public List<CityDto> getTop10ByNotesDesc() { return cityMapper.toDtos(cityRepository.findTop10ByOrderByNotesDesc()); }
+    public List<CityClassementDto> getTop10ByNotesDesc() { return cityRepository.findTop10ByOrderByNotesDesc(PageRequest.of(0,10)); }
 }

@@ -1,5 +1,6 @@
 package com.safeTravel.controller;
 
+import com.safeTravel.dto.CityClassementDto;
 import com.safeTravel.dto.CityDto;
 import com.safeTravel.service.CityService;
 import org.slf4j.Logger;
@@ -71,7 +72,7 @@ public class CityController {
 
     @GetMapping({"/top10"})
     @ResponseStatus(HttpStatus.OK)
-    public List<CityDto> getTop10OrderByDesc() {
+    public List<CityClassementDto> getTop10OrderByDesc() {
         return cityService.getTop10ByNotesDesc();
     }
 }

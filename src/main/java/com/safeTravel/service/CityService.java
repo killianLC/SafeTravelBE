@@ -1,5 +1,6 @@
 package com.safeTravel.service;
 
+import com.safeTravel.dto.CityClassementDto;
 import com.safeTravel.dto.CityDto;
 
 import javax.transaction.Transactional;
@@ -11,5 +12,5 @@ public interface CityService extends ServiceShared<CityDto, Long> {
 
     Double getRatingAverageByName(String name);
 
-    List<CityDto> getTop10ByNotesDesc();
+    List<CityClassementDto> getTop10ByNotesDesc();
 }
