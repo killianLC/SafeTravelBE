@@ -62,7 +62,7 @@ public class AuthController {
         List<String> roles = userDetails.getAuthorities().stream().map(item -> item.getAuthority()).collect(Collectors.toList());
 
         logger.info("New user authanticate: " + loginRequest.getEmail());
-        return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getId(), userDetails.getEmail(), roles));
+        return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getId(), userDetails.getFirstname(), userDetails.getLastname(), userDetails.getEmail(), roles));
     }
 
     @PostMapping("/signup")
