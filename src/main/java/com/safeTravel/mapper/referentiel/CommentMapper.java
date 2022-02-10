@@ -12,12 +12,12 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public interface CommentMapper extends GenericMapperCyclingAvoiding<Comment, CommentDto> {
     @Override
-    @Mapping(source = "comment.city", target = "cityDto")
+    @Mapping(source = "comment.city", target = "city")
     default CommentDto toDto(Comment comment) {
         return GenericMapperCyclingAvoiding.super.toDto(comment);
     }
 
     @Override
-    @Mapping(source = "comment.city", target = "cityDto")
+    @Mapping(source = "comment.city", target = "city")
     CommentDto toDto(Comment comment, CycleAvoidingMappingContext cycleAvoidingMappingContext);
 }

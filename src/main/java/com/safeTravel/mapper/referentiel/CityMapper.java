@@ -11,12 +11,12 @@ import org.mapstruct.Mapping;
 public interface CityMapper extends GenericMapperCyclingAvoiding<City, CityDto> {
 
     @Override
-    @Mapping(source = "city.comments", target = "commentsDto")
+    @Mapping(source = "city.comments", target = "comments")
     default CityDto toDto(City city) {
         return GenericMapperCyclingAvoiding.super.toDto(city);
     }
 
     @Override
-    @Mapping(source = "city.comments", target = "commentsDto")
+    @Mapping(source = "city.comments", target = "comments")
     CityDto toDto(City city, CycleAvoidingMappingContext cycleAvoidingMappingContext);
 }
