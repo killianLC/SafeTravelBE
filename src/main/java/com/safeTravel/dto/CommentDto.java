@@ -14,4 +14,5 @@ public class CommentDto {
     private String description;
     private float rating;
     private UserDto user;
+    private CityDto city;
 }
