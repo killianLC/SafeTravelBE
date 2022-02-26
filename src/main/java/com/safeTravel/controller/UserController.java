@@ -7,6 +7,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,6 +20,9 @@ public class UserController {
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     private final UserService userService;
+
+    @Autowired
+    PasswordEncoder encoder;
 
     @Autowired
     public UserController(UserService userService) {
@@ -86,5 +91,26 @@ public class UserController {
     public void delete(@PathVariable("id") Long id) {
         logger.debug("User, delete() :{}", id);
         userService.deleteById(id);
+    }
+
+    /**
+     * Endpoint /users/update_firstname_lastname type PUT
+     */
+    @PostMapping({"/update_firstname_lastname"})
+    @ResponseStatus(HttpStatus.OK)
+    public void updateFirstnameLastname(@RequestBody UserDto userDto) {
+        logger.debug("User, updateFirstnameAndLastname(): {}", userDto.getId());
+        userService.updateFirstnameAndLastname(userDto.getId(), userDto.getFirstname(), userDto.getLastname());
+    }
+
+    /**
+     * Endpoint /users/update_password type PUT
+     */
+    @PostMapping({"/update_password"})
+    @ResponseStatus(HttpStatus.OK)
+    public void updatePassword(@RequestBody UserDto userDto) {
+        logger.debug("User, updatePassword(): {}", userDto.getId());
+        userDto.setPassword(encoder.encode(userDto.getPassword()));
+        userService.updatePassword(userDto.getId(), userDto.getPassword());
     }
 }

@@ -58,4 +58,20 @@ public class UserServiceImpl implements UserService {
     public void deleteById(Long id) {
         userRepository.deleteById(id);
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void updateFirstnameAndLastname(Long id, String firstname, String lastname) {
+        userRepository.queryUpdateFirstnameAndLastnameById(firstname, lastname, id);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void updatePassword(Long id, String password) {
+        userRepository.queryUpdatePasswordById(password, id);
+    }
 }

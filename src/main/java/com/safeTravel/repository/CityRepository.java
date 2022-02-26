@@ -10,9 +10,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
-import java.awt.print.Pageable;
 import java.util.List;
-import java.util.Set;
 
 @Repository
 public interface CityRepository extends JpaRepository<City, Long> {
