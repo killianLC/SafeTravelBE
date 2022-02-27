@@ -21,6 +21,5 @@ public class CityDto {
     private Long id;
     private String name;
     private List<CommentDto> comments;
-    private Set<Note> notes;;
-
+    private List<NoteDto> notes;
 }

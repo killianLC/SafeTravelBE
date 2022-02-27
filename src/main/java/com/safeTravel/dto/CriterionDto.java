@@ -12,6 +12,4 @@ import lombok.Setter;
 public class CriterionDto {
     private Long id;
     private String name;
-    private Double rating;
-    private StatisticDto statistic;
 }

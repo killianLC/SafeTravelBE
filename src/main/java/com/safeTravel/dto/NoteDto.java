@@ -11,10 +11,13 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @NoArgsConstructor
-public class CommentDto {
+public class NoteDto {
+
     private Long id;
-    private String description;
+
+    private Double note;
+
     private LocalDate date;
-    private Double rating;
-    private ReducedUserDto user;
+
+    private CriterionDto criterion;
 }
