@@ -23,7 +23,7 @@ public class Comment {
     private LocalDate date;
 
     @Column
-    private Double rating;
+    private Integer rating;
 
     @JoinColumn
     @ManyToOne(fetch = FetchType.LAZY)

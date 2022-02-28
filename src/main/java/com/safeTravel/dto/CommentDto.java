@@ -15,7 +15,7 @@ public class CommentDto {
     private Long id;
     private String description;
     private LocalDate date;
-    private Double rating;
+    private Integer rating;
     private ReducedUserDto user;
     private ReducedCityDto city;
 }
