@@ -23,8 +23,8 @@ public class Trip {
     @OneToMany(mappedBy = "trip", fetch = FetchType.LAZY)
     private Set<Step> steps;
 
-    @JoinColumn(name="organisateur_id")
-    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "organisateur_id")
+    @ManyToOne(fetch = FetchType.LAZY)
     private User organisateur;
 
     @OneToMany(mappedBy = "trip", fetch = FetchType.LAZY)
