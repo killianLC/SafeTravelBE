@@ -51,4 +51,9 @@ public class TripServiceImpl implements TripService {
     public void deleteById(Long id) {
         this.tripRepository.deleteById(id);
     }
+
+    @Override
+    public List<TripDto> getUserTrips(Long userId) {
+        return this.tripMapper.toDtos(this.tripRepository.findAllByOrganisateurId(userId));
+    }
 }

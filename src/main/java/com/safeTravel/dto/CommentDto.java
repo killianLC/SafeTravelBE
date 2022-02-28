@@ -16,6 +16,6 @@ public class CommentDto {
     private String description;
     private LocalDate date;
     private Integer rating;
-    private ReducedUserDto user;
+    private UserDto user;
     private ReducedCityDto city;
 }

@@ -4,18 +4,17 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import java.time.LocalDate;
 
 @Data
 @Getter
 @Setter
 @NoArgsConstructor
-public class StepDto {
+public class ParticipantDto {
     private Long id;
 
-    private LocalDate date;
-
-    private ReducedCityDto city;
+    private ReducedUserDto user;
 
     private TripDto trip;
+
+    private Boolean statut = false;
 }

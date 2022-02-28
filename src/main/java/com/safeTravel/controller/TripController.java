@@ -45,6 +45,12 @@ public class TripController {
         return t;
     }
 
+    @GetMapping({"/user/{userId}"})
+    @ResponseStatus(HttpStatus.OK)
+    public List<TripDto> getUserTrips(@PathVariable Long userId) {
+        return this.tripService.getUserTrips(userId);
+    }
+
     /**
      * Endpoint /trips type POST
      *

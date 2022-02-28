@@ -1,7 +1,6 @@
 package com.safeTravel.repository;
 
 import com.safeTravel.dto.CityClassementDto;
-import com.safeTravel.dto.CityDto;
 import com.safeTravel.entity.City;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.repository.JpaRepository;
