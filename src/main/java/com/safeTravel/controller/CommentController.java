@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping({"/comment"})
+@RequestMapping({"/comments"})
 public class CommentController {
     private static final Logger logger = LoggerFactory.getLogger(CommentController.class);
 

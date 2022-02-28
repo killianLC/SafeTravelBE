@@ -1,4 +1,5 @@
 package com.safeTravel.dto;
+
 import lombok.*;
 
 @Data
@@ -6,8 +7,7 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ReducedUserDto {
+public class ReducedCityDto {
     private Long id;
-    private String firstname;
-    private String lastname;
+    private String name;
 }
