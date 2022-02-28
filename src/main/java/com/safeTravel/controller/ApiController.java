@@ -21,5 +21,16 @@ public class ApiController {
         return response;
     }
 
-    
+    /**
+     * Endpoint / type GET
+     *
+     * @return ResponseEntity<String>
+     */
+    @GetMapping({"/flux_rss/{city}"})
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<String> getFluxRss(@PathVariable("city") String city) {
+        RestTemplate restTemplate = new RestTemplate();
+        ResponseEntity<String> response = restTemplate.getForEntity("https://news.google.com/rss/search?q=" + city + "&hl=fr", String.class);
+        return response;
+    }
 }
