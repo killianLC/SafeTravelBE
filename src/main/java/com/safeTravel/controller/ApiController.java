@@ -31,10 +31,11 @@ public class ApiController {
      */
     @GetMapping({"/flux_rss/{city}"})
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<String> getFluxRss(@PathVariable("city") String city) {
+    public String getFluxRss(@PathVariable("city") String city) {
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<String> response = restTemplate.getForEntity("https://news.google.com/rss/search?q=" + city + "&hl=fr", String.class);
-        return response;
+
+        return response.getBody();
     }
 
     /**
@@ -44,10 +45,11 @@ public class ApiController {
      */
     @GetMapping({"/city/{name}"})
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<String> getCityData(@PathVariable("name") String name) {
+    public String getCityData(@PathVariable("name") String name) {
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<String> response = restTemplate.getForEntity("https://nominatim.openstreetmap.org/search/" + name + "?format=json&addressdetails=1&limit=1&polygon_svg=1", String.class);
-        return response;
+
+        return response.getBody();
     }
 
     /**
@@ -57,9 +59,10 @@ public class ApiController {
      */
     @GetMapping({"/meteo/{latitude}/{longitude}"})
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<String> getMeteo(@PathVariable("latitude") String latitude, @PathVariable("longitude") String longitude) {
+    public String getMeteo(@PathVariable("latitude") String latitude, @PathVariable("longitude") String longitude) {
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<String> response = restTemplate.getForEntity("https://api.openweathermap.org/data/2.5/onecall?lat=" + latitude + "&lon=" + longitude + "&exclude=current,minutely,hourly&appid=" + API_KEY_METEO, String.class);
-        return response;
+
+        return response.getBody();
     }
 }
