@@ -25,7 +25,7 @@ public class TripController {
      * @return TripDto found thanks to his id
      */
     @GetMapping({"/{id}"})
-    @ResponseStatus(HttpStatus.FOUND)
+    @ResponseStatus(HttpStatus.OK)
     public TripDto getById(@PathVariable("id") Long id) {
         TripDto t = tripService.getById(id);
         logger.debug("Trip, getById() :{}", t);
