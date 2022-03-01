@@ -1,6 +1,5 @@
 package com.safeTravel.controller;
 
-import com.safeTravel.dto.CityClassementDto;
 import com.safeTravel.dto.CityDto;
 import com.safeTravel.service.CityService;
 import lombok.extern.slf4j.Slf4j;
@@ -8,7 +7,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -18,7 +16,7 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@RequestMapping({"/city"})
+@RequestMapping({"/cities"})
 public class CityController {
     private static final Logger logger = LoggerFactory.getLogger(CityController.class);
 
@@ -34,7 +32,7 @@ public class CityController {
      *
      * @return List<CityDto> of the cities contains in database
      */
-    @GetMapping({"/cities"})
+    @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<CityDto> getAll() {
         List<CityDto> cities = cityService.getAll();
