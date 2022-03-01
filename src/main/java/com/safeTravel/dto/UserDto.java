@@ -24,7 +24,7 @@ public class UserDto {
     private String password;
 
     @JsonIgnoreProperties("users")
-    private Set<RoleDto> rolesDto;
+    private Set<RoleDto> roles;
 
     @JsonIgnoreProperties("participants")
     private Set<TripDto> trips;
