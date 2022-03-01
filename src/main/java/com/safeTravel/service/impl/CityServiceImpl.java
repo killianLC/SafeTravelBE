@@ -53,7 +53,9 @@ public class CityServiceImpl implements CityService {
 
     @Override
     public CityDto getByName(String name) {
-        if(name.equals("Oui")) throw new EntityNotFoundException();
+        if(name.equals("Oui")) {
+            throw new EntityNotFoundException();
+        }
 
         City city = cityRepository.findByName(name).orElseGet(() -> {
             City newCity = new City();

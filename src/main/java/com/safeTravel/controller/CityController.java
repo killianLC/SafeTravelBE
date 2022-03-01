@@ -10,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.HashMap;
 import java.util.List;
 
@@ -48,6 +50,13 @@ public class CityController {
     @GetMapping({"/{name}"})
     @ResponseStatus(HttpStatus.OK)
     public CityDto getByName(@PathVariable("name") String name) {
+        try {
+
+        } catch (EntityNotFoundException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        } catch(Exception e) {
+            log.debug(e.getMessage());
+        }
         return cityService.getByName(name);
     }
 
