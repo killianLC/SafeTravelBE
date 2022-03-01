@@ -1,14 +1,18 @@
 package com.safeTravel.service.impl;
 
 import com.safeTravel.dto.TripDto;
+import com.safeTravel.entity.User;
 import com.safeTravel.mapper.referentiel.TripMapper;
 import com.safeTravel.repository.TripRepository;
+import com.safeTravel.repository.UserRepository;
 import com.safeTravel.service.TripService;
+import com.safeTravel.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TripServiceImpl implements TripService {
@@ -16,6 +20,8 @@ public class TripServiceImpl implements TripService {
     private TripRepository tripRepository;
     @Autowired
     private TripMapper tripMapper;
+    @Autowired
+    private UserRepository userRepository;
 
     /**
      * {@inheritDoc}
@@ -42,6 +48,9 @@ public class TripServiceImpl implements TripService {
      * {@inheritDoc}
      */
     public TripDto create(TripDto tripDto) {
+        //Optional<User> user = this.userRepository.findById(tripDto.getOrganisateurUid());
+
+        //if(user.isPresent())
         return this.tripMapper.toDto(this.tripRepository.save(this.tripMapper.toEntity(tripDto)));
     }
 

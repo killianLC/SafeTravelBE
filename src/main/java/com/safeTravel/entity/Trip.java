@@ -20,7 +20,7 @@ public class Trip {
     @Column
     private String description;
 
-    @OneToMany(mappedBy = "trip", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "trip", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Step> steps;
 
     @JoinColumn(name = "organisateur_id")

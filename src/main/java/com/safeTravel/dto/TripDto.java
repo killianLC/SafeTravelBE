@@ -18,9 +18,7 @@ public class TripDto {
 
     private String description;
 
-    @JsonIgnoreProperties(value = "trip")
-    private Set<StepDto> steps;
+    private User organisateur;
 
-    @JsonIgnoreProperties(value = "trip")
-    private Set<ParticipantDto> participants;
+    private Set<StepDto> steps;
 }

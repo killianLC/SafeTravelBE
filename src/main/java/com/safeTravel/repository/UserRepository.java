@@ -7,11 +7,15 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
     User findByEmail(String email);
 
     boolean existsByEmail(String email);
+
+    Optional<User> findById(String uid);
 
     @Modifying
     @Query(value="UPDATE user SET user.firstname = :firstname, user.lastname = :lastname WHERE user.id = :id", nativeQuery = true)

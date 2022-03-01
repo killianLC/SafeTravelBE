@@ -16,7 +16,7 @@ public class City {
     @Column
     private Long id;
 
-    @Column
+    @Column(unique = true)
     private String name;
 
     @OneToMany(mappedBy = "city", fetch = FetchType.LAZY)

@@ -16,6 +16,6 @@ public class StepDto {
 
     private CityDto city;
 
-    @EqualsAndHashCode.Exclude
+    @JsonIgnoreProperties(value = "steps")
     private TripDto trip;
 }
