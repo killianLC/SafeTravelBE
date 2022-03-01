@@ -14,7 +14,7 @@ public class StepDto {
 
     private LocalDate date;
 
-    private ReducedCityDto city;
+    private CityDto city;
 
     @EqualsAndHashCode.Exclude
     private TripDto trip;

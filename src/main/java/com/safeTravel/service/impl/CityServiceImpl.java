@@ -2,6 +2,7 @@ package com.safeTravel.service.impl;
 
 import com.safeTravel.dto.CityClassementDto;
 import com.safeTravel.dto.CityDto;
+import com.safeTravel.entity.City;
 import com.safeTravel.mapper.referentiel.CityMapper;
 import com.safeTravel.repository.CityRepository;
 import com.safeTravel.service.CityService;
@@ -10,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @Slf4j
@@ -50,7 +53,17 @@ public class CityServiceImpl implements CityService {
 
     @Override
     public CityDto getByName(String name) {
-        return cityMapper.toDto(cityRepository.findByName(name));
+        if(name.equals("Oui")) throw new EntityNotFoundException();
+
+        City city = cityRepository.findByName(name).orElseGet(() -> {
+            City newCity = new City();
+            newCity.setName(name);
+            return newCity;
+        });
+
+        this.cityRepository.save(city);
+
+        return cityMapper.toDto(city);
     }
 
     @Override
