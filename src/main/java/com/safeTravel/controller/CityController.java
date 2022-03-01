@@ -1,6 +1,7 @@
 package com.safeTravel.controller;
 
 import com.safeTravel.dto.CityDto;
+import com.safeTravel.dto.ReducedCityDto;
 import com.safeTravel.service.CityService;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
@@ -34,8 +35,8 @@ public class CityController {
      */
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<CityDto> getAll() {
-        List<CityDto> cities = cityService.getAll();
+    public List<ReducedCityDto> getAll() {
+        List<ReducedCityDto> cities = cityService.getAllReducedCity();
         logger.info("City, getAll() :{}", cities);
         return cities;
     }

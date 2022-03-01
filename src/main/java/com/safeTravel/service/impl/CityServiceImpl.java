@@ -2,8 +2,10 @@ package com.safeTravel.service.impl;
 
 import com.safeTravel.dto.CityClassementDto;
 import com.safeTravel.dto.CityDto;
+import com.safeTravel.dto.ReducedCityDto;
 import com.safeTravel.entity.City;
 import com.safeTravel.mapper.referentiel.CityMapper;
+import com.safeTravel.mapper.referentiel.ReducedCityMapper;
 import com.safeTravel.repository.CityRepository;
 import com.safeTravel.service.CityService;
 import lombok.extern.slf4j.Slf4j;
@@ -13,8 +15,6 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
-import java.util.Optional;
-import java.util.Set;
 
 @Slf4j
 @Service
@@ -26,9 +26,16 @@ public class CityServiceImpl implements CityService {
     @Autowired
     private CityRepository cityRepository;
 
+    @Autowired
+    private ReducedCityMapper reducedCityMapper;
+
     @Override
     public List<CityDto> getAll() {
         return cityMapper.toDtos(cityRepository.findAll());
+    }
+
+    public List<ReducedCityDto> getAllReducedCity() {
+        return reducedCityMapper.toDtos(cityRepository.findAll());
     }
 
     @Override
