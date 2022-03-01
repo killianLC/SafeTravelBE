@@ -1,9 +1,8 @@
 package com.safeTravel.dto;
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.*;
+
 import java.time.LocalDate;
 
 @Data
@@ -17,5 +16,6 @@ public class StepDto {
 
     private ReducedCityDto city;
 
+    @EqualsAndHashCode.Exclude
     private TripDto trip;
 }

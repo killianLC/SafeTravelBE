@@ -26,8 +26,8 @@ public class UserDto {
     @JsonIgnoreProperties("users")
     private Set<RoleDto> rolesDto;
 
-    @JsonIgnoreProperties("user")
-    private Set<TravelDto> travels;
+    @JsonIgnoreProperties("participants")
+    private Set<TripDto> trips;
 
     @JsonIgnoreProperties("user")
     private Set<CommentDto> comments;
