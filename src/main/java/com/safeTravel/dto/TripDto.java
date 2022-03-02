@@ -16,6 +16,8 @@ public class TripDto {
     @JsonIgnoreProperties({"comments","roles","trips"})
     private UserDto organisateur;
 
+    private ParticipantDto participants;
+
     @JsonIgnoreProperties({"trip"})
     private Set<StepDto> steps;
 }

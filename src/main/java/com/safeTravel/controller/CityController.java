@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -75,5 +76,26 @@ public class CityController {
 
         logger.debug("City, getAverageByName() :{}", name);
         return response;
+    }
+
+    @PostMapping({"/favoris/{cityId}"})
+    @ResponseStatus(HttpStatus.OK)
+    public void createFavoris(@RequestHeader("UtilisateurId") Long utilisateurId, @PathVariable("cityId") Long cityId) {
+        if(utilisateurId == null) throw new AccessDeniedException("L'utilisateur n'est pas connecté");
+        this.cityService.createFavoris(cityId, utilisateurId);
+    }
+
+    @DeleteMapping({"/favoris/{cityId}"})
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteFavoris(@RequestHeader("UtilisateurId") Long utilisateurId, @PathVariable("cityId") Long cityId) {
+        if(utilisateurId == null) throw new AccessDeniedException("L'utilisateur n'est pas connecté");
+        this.cityService.deleteFavoris(cityId, utilisateurId);
+    }
+
+    @GetMapping({"/favoris/isFav/{cityId}"})
+    @ResponseStatus(HttpStatus.OK)
+    public Boolean isFavoris(@RequestHeader("UtilisateurId") Long utilisateurId, @PathVariable("cityId") Long cityId) {
+        if(utilisateurId == null) throw new AccessDeniedException("L'utilisateur n'est pas connecté");
+        return this.cityService.isFavoris(cityId, utilisateurId);
     }
 }

@@ -4,9 +4,11 @@ import com.safeTravel.dto.CityClassementDto;
 import com.safeTravel.dto.CityDto;
 import com.safeTravel.dto.ReducedCityDto;
 import com.safeTravel.entity.City;
+import com.safeTravel.entity.User;
 import com.safeTravel.mapper.referentiel.CityMapper;
 import com.safeTravel.mapper.referentiel.ReducedCityMapper;
 import com.safeTravel.repository.CityRepository;
+import com.safeTravel.repository.UserRepository;
 import com.safeTravel.service.CityService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +34,9 @@ public class CityServiceImpl implements CityService {
 
     @Autowired
     private ReducedCityMapper reducedCityMapper;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Override
     public List<CityDto> getAll() {
@@ -92,4 +97,47 @@ public class CityServiceImpl implements CityService {
 
     @Override
     public List<CityClassementDto> getTop10ByNotesDesc() { return cityRepository.findTop10ByOrderByNotesDesc(PageRequest.of(0,10)); }
+
+    @Override
+    public void createFavoris(Long cityId, Long userId) {
+        Optional<City> city = cityRepository.findById(cityId);
+
+        if(!city.isPresent()) throw new EntityNotFoundException("La ville n'existe pas");
+
+        Optional<User> user = userRepository.findById(cityId);
+
+        if(!user.isPresent()) throw new EntityNotFoundException("L'utilisateur n'existe pas");
+
+        user.get().getCitiesFavoris().add(city.get());
+
+        this.userRepository.save(user.get());
+    }
+
+    @Override
+    public void deleteFavoris(Long cityId, Long userId) {
+        Optional<City> city = cityRepository.findById(cityId);
+
+        if(!city.isPresent()) throw new EntityNotFoundException("La ville n'existe pas");
+
+        Optional<User> user = userRepository.findById(cityId);
+
+        if(!user.isPresent()) throw new EntityNotFoundException("L'utilisateur n'existe pas");
+
+        user.get().getCitiesFavoris().remove(city.get());
+
+        this.userRepository.save(user.get());
+    }
+
+    @Override
+    public Boolean isFavoris(Long cityId, Long userId) {
+        Optional<City> city = cityRepository.findById(cityId);
+
+        if(!city.isPresent()) throw new EntityNotFoundException("La ville n'existe pas");
+
+        Optional<User> user = userRepository.findById(cityId);
+
+        if(!user.isPresent()) throw new EntityNotFoundException("L'utilisateur n'existe pas");
+
+        return user.get().getCitiesFavoris().contains(city.get());
+    }
 }
