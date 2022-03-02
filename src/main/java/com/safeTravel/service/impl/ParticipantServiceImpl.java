@@ -42,7 +42,7 @@ public class ParticipantServiceImpl implements ParticipantService {
 
     @Override
     public ParticipantDto getById(Long id) {
-        return null;
+        return this.participantMapper.toDto(this.participantRepository.getById(id));
     }
 
     @Override

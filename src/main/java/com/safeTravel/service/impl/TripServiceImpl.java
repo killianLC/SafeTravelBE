@@ -2,18 +2,17 @@ package com.safeTravel.service.impl;
 
 import com.safeTravel.dto.TripDto;
 import com.safeTravel.dto.create.TripCreationDto;
-import com.safeTravel.entity.City;
-import com.safeTravel.entity.Step;
-import com.safeTravel.entity.Trip;
-import com.safeTravel.entity.User;
+import com.safeTravel.entity.*;
 import com.safeTravel.mapper.referentiel.TripMapper;
 import com.safeTravel.repository.CityRepository;
+import com.safeTravel.repository.ParticipantRepository;
 import com.safeTravel.repository.TripRepository;
 import com.safeTravel.repository.UserRepository;
 import com.safeTravel.service.TripService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityExistsException;
 import javax.persistence.EntityNotFoundException;
 import java.util.*;
 
@@ -29,6 +28,8 @@ public class TripServiceImpl implements TripService {
     private StepServiceImpl stepService;
     @Autowired
     private CityRepository cityRepository;
+    @Autowired
+    private ParticipantRepository participantRepository;
 
     /**
      * {@inheritDoc}
@@ -84,6 +85,21 @@ public class TripServiceImpl implements TripService {
         this.tripRepository.save(trip);
 
         return trip.getId();
+    }
+
+    @Override
+    public Boolean isParticipant(Long utilisateurId, Long tripId) {
+        Optional<User> user = this.userRepository.findById(utilisateurId);
+        Optional<Trip> trip = this.tripRepository.findById(tripId);
+
+        if(!user.isPresent() || !trip.isPresent()) throw new EntityNotFoundException("L'utilisateur ou le voyage n'existe pas");
+
+        if(user.get().getId().equals(trip.get().getOrganisateur().getId())) throw new EntityExistsException("L'organisateur ne peux pas rejoindre le voyage");
+
+        Optional<Participant> participant = this.participantRepository.findByTripAndUser(trip.get(), user.get());
+
+        if(!participant.isPresent()) { return false; }
+        else return trip.get().getParticipants().contains(participant.get());
     }
 
     /**
