@@ -19,6 +19,6 @@ public class Criterion {
     @Column
     private String name;
 
-    @OneToMany(mappedBy = "criterion", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "criterion")
     private Set<Note> notes;
 }

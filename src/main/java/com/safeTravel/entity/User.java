@@ -32,20 +32,26 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany
     @JoinTable(name = "user_role",
             joinColumns = @JoinColumn(name = "role_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id"))
     private Set<Role> roles;
 
-    @OneToMany(mappedBy = "organisateur", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user")
+    private Set<Participant> participations;
+
+    @OneToMany(mappedBy = "organisateur")
     private Set<Trip> trips;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user")
     private Set<Comment> comments;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    private Set<City> favoris;
+    @ManyToMany
+    @JoinTable(name = "user_favoris_ville",
+            joinColumns = @JoinColumn(name = "ville_favoris_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id"))
+    private Set<City> citiesFavoris;
 
     public User(String firstname, String lastname, String email, String password) {
         this.firstname = firstname;

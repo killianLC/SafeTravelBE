@@ -20,10 +20,10 @@ public class Step {
     private LocalDate date;
 
     @JoinColumn(name = "city_id", referencedColumnName = "id")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private City city;
 
     @JoinColumn(name = "trip_id", referencedColumnName = "id")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private Trip trip;
 }

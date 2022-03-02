@@ -23,10 +23,10 @@ public class Note {
     private LocalDate date;
 
     @JoinColumn(name = "city_id", nullable = false, referencedColumnName = "id")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private City city;
 
     @JoinColumn(name = "criterion_id", nullable = false, referencedColumnName = "id")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private Criterion criterion;
 }

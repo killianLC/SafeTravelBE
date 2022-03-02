@@ -20,13 +20,13 @@ public class Trip {
     @Column
     private String description;
 
-    @OneToMany(mappedBy = "trip", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "trip")
     private Set<Step> steps;
 
     @JoinColumn(name = "organisateur_id", referencedColumnName = "id")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private User organisateur;
 
-    @OneToMany(mappedBy = "trip", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "trip")
     private Set<Participant> participants;
 }

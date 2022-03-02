@@ -19,12 +19,15 @@ public class City {
     @Column(unique = true)
     private String name;
 
-    @OneToMany(mappedBy = "city", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "city")
     private Set<Comment> comments;
 
-    @OneToMany(mappedBy = "city", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "city")
     private Set<Note> notes;
 
-    @OneToMany(mappedBy = "city", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "city")
     private Set<Step> steps;
+
+    @ManyToMany(mappedBy = "citiesFavoris")
+    private Set<User> usersFavories;
 }
