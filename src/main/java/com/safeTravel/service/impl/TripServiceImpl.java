@@ -59,7 +59,7 @@ public class TripServiceImpl implements TripService {
     /**
      * {@inheritDoc}
      */
-    public void create(TripCreationDto tripDto) {
+    public Long create(TripCreationDto tripDto) {
         Optional<User> user = this.userRepository.findById(tripDto.getOrganisateurId());
 
         if(!user.isPresent()) throw new EntityNotFoundException("L'organisateur de ce trip n'existe pas");
@@ -83,7 +83,7 @@ public class TripServiceImpl implements TripService {
 
         this.tripRepository.save(trip);
 
-        //return this.tripMapper.toDto(trip);
+        return trip.getId();
     }
 
     /**

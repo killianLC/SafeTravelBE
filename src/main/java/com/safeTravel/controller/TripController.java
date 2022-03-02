@@ -59,9 +59,8 @@ public class TripController {
      */
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void create(@RequestBody TripCreationDto tripDto) {
-        this.tripService.create(tripDto);
-        logger.debug("Trip, create() :{}");
+    public Long create(@RequestBody TripCreationDto tripDto) {
+        return this.tripService.create(tripDto);
     }
 
     /**
