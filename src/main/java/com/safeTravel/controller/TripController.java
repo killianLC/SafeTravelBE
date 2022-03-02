@@ -1,7 +1,7 @@
 package com.safeTravel.controller;
 
 import com.safeTravel.dto.TripDto;
-import com.safeTravel.dto.tripsDto.TripCreationDto;
+import com.safeTravel.dto.create.TripCreationDto;
 import com.safeTravel.service.TripService;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;

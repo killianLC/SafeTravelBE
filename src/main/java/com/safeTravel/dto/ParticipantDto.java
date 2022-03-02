@@ -1,5 +1,6 @@
 package com.safeTravel.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,7 +15,5 @@ public class ParticipantDto {
 
     private ReducedUserDto user;
 
-    private TripDto trip;
-
-    private Boolean statut = false;
+    private Boolean statut;
 }

@@ -1,7 +1,7 @@
 package com.safeTravel.service;
 
 import com.safeTravel.dto.TripDto;
-import com.safeTravel.dto.tripsDto.TripCreationDto;
+import com.safeTravel.dto.create.TripCreationDto;
 
 import java.util.List;
 
