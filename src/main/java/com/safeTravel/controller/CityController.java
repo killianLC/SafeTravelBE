@@ -72,8 +72,6 @@ public class CityController {
         Double ratingAverage = cityService.getRatingAverageByName(name);
 
         response.put("rating_average", ratingAverage);
-        // TODO à modifier avec les statistiques
-        response.put("statistic_average", 0);
 
         logger.debug("City, getAverageByName() :{}", name);
         return response;
