@@ -54,7 +54,7 @@ public class CityController {
 
         } catch (EntityNotFoundException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
-        } catch(Exception e) {
+        } catch (Exception e) {
             log.debug(e.getMessage());
         }
         return cityService.getByName(name);
@@ -81,21 +81,21 @@ public class CityController {
     @PostMapping({"/favoris/{cityId}"})
     @ResponseStatus(HttpStatus.OK)
     public void createFavoris(@RequestHeader("UtilisateurId") Long utilisateurId, @PathVariable("cityId") Long cityId) {
-        if(utilisateurId == null) throw new AccessDeniedException("L'utilisateur n'est pas connecté");
+        if (utilisateurId == null) throw new AccessDeniedException("L'utilisateur n'est pas connecté");
         this.cityService.createFavoris(cityId, utilisateurId);
     }
 
-    @DeleteMapping({"/favoris/{cityId}"})
+    @PostMapping({"/favoris/delete/{cityId}"})
     @ResponseStatus(HttpStatus.OK)
     public void deleteFavoris(@RequestHeader("UtilisateurId") Long utilisateurId, @PathVariable("cityId") Long cityId) {
-        if(utilisateurId == null) throw new AccessDeniedException("L'utilisateur n'est pas connecté");
+        if (utilisateurId == null) throw new AccessDeniedException("L'utilisateur n'est pas connecté");
         this.cityService.deleteFavoris(cityId, utilisateurId);
     }
 
     @GetMapping({"/favoris/isFav/{cityId}"})
     @ResponseStatus(HttpStatus.OK)
     public Boolean isFavoris(@RequestHeader("UtilisateurId") Long utilisateurId, @PathVariable("cityId") Long cityId) {
-        if(utilisateurId == null) throw new AccessDeniedException("L'utilisateur n'est pas connecté");
+        if (utilisateurId == null) throw new AccessDeniedException("L'utilisateur n'est pas connecté");
         return this.cityService.isFavoris(cityId, utilisateurId);
     }
 }

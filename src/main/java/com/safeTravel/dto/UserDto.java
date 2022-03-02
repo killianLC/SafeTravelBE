@@ -29,5 +29,8 @@ public class UserDto {
     private Set<TripDto> trips;
 
     private Set<CommentDto> comments;
+
+    @JsonIgnoreProperties({"comments", "notes", "steps"})
+    private Set<CityDto> citiesFavoris;
 }
 
