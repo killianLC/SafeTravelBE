@@ -1,11 +1,10 @@
 package com.safeTravel.dto;
 
-import com.safeTravel.entity.User;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import java.util.Set;
 
-@Data
 @Getter
 @Setter
 @NoArgsConstructor
@@ -14,8 +13,9 @@ public class TripDto {
 
     private String description;
 
-    private User organisateur;
+    @JsonIgnoreProperties({"comments","roles","trips"})
+    private UserDto organisateur;
 
-    @EqualsAndHashCode.Exclude
+    @JsonIgnoreProperties({"trip"})
     private Set<StepDto> steps;
 }
