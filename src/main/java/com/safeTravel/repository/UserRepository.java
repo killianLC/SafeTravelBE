@@ -15,7 +15,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     boolean existsByEmail(String email);
 
-    Optional<User> findById(String uid);
+    Optional<User> findById(Long id);
 
     @Modifying
     @Query(value="UPDATE user SET user.firstname = :firstname, user.lastname = :lastname WHERE user.id = :id", nativeQuery = true)

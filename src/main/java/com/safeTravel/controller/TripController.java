@@ -1,6 +1,7 @@
 package com.safeTravel.controller;
 
 import com.safeTravel.dto.TripDto;
+import com.safeTravel.dto.tripsDto.TripCreationDto;
 import com.safeTravel.service.TripService;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
@@ -58,10 +59,9 @@ public class TripController {
      */
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public TripDto create(@RequestBody TripDto tripDto) {
-        TripDto t = this.tripService.create(tripDto);
-        logger.debug("Trip, create() :{}", t);
-        return t;
+    public void create(@RequestBody TripCreationDto tripDto) {
+        this.tripService.create(tripDto);
+        logger.debug("Trip, create() :{}");
     }
 
     /**

@@ -20,7 +20,7 @@ public class Step {
     private LocalDate date;
 
     @JoinColumn(name = "city_id")
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     private City city;
 
     @JoinColumn(name = "trip_id")

@@ -18,7 +18,9 @@ public class TripDto {
 
     private String description;
 
-    private User organisateur;
+    private Long organisateurId;
 
+    @JsonIgnoreProperties(value = "trip")
+    @EqualsAndHashCode.Exclude
     private Set<StepDto> steps;
 }

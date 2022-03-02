@@ -16,6 +16,5 @@ public class StepDto {
 
     private CityDto city;
 
-    @JsonIgnoreProperties(value = "steps")
     private TripDto trip;
 }
