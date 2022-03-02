@@ -1,5 +1,6 @@
 package com.safeTravel.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,6 +17,8 @@ public class CommentDto {
     private String description;
     private LocalDate date;
     private Integer rating;
+    @JsonIgnoreProperties(value = "comments")
     private UserDto user;
+    @JsonIgnoreProperties(value = "comments")
     private CityDto city;
 }

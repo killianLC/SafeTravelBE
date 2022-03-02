@@ -18,11 +18,21 @@ public class CommentController {
     @Autowired
     private CommentServiceImpl commentService;
 
-    @GetMapping({"/all"})
+    @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<CommentDto> getAll() {
-        List<CommentDto> comments = commentService.getAll();
-        return comments;
+        return commentService.getAll();
+    }
+
+    /**
+     * Endpoint /comments/{id} type GET
+     *
+     * @return CommentDto found thanks to his id
+     */
+    @GetMapping({"/{id}"})
+    @ResponseStatus(HttpStatus.FOUND)
+    public CommentDto getById(@PathVariable("id") Long id) {
+        return commentService.getById(id);
     }
 
     @GetMapping({"/user/{user_id}"})
@@ -31,5 +41,38 @@ public class CommentController {
         List<CommentDto> comments = commentService.getCommentsByUserId(user_id);
         logger.debug("Comment, getCommentsByUserId() :{}", user_id);
         return comments;
+    }
+
+    /**
+     * Endpoint /comments type POST
+     *
+     * @return CommentDto created
+     */
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public CommentDto create(@RequestBody CommentDto commentDto) {
+        return this.commentService.create(commentDto);
+    }
+
+    /**
+     * Endpoint /comments type PUT
+     *
+     * @return CommentDto updated
+     */
+    @PutMapping
+    @ResponseStatus(HttpStatus.OK)
+    public CommentDto update(@RequestBody CommentDto commentDto) {
+        return this.commentService.update(commentDto);
+    }
+
+    /**
+     * Endpoint /comments/{id} type DELETE
+     *
+     * @param id id of the deleted comment
+     */
+    @DeleteMapping({"/{id}"})
+    @ResponseStatus(HttpStatus.OK)
+    public void delete(@PathVariable("id") Long id) {
+        this.commentService.deleteById(id);
     }
 }

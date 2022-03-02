@@ -21,7 +21,6 @@ public class CommentServiceImpl implements com.safeTravel.service.CommentService
 
     @Override
     public List<CommentDto> getAll() {
-        log.info(commentRepository.findAll().toString());
         return commentMapper.toDtos(commentRepository.findAll());
     }
 
