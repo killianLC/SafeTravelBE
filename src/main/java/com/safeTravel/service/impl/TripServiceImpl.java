@@ -1,19 +1,16 @@
 package com.safeTravel.service.impl;
 
 import com.safeTravel.dto.TripDto;
-import com.safeTravel.dto.tripsDto.TripCreationDto;
+import com.safeTravel.dto.create.TripCreationDto;
 import com.safeTravel.entity.City;
 import com.safeTravel.entity.Step;
 import com.safeTravel.entity.Trip;
 import com.safeTravel.entity.User;
-import com.safeTravel.mapper.referentiel.CityMapper;
 import com.safeTravel.mapper.referentiel.TripMapper;
 import com.safeTravel.repository.CityRepository;
 import com.safeTravel.repository.TripRepository;
 import com.safeTravel.repository.UserRepository;
-import com.safeTravel.service.StepService;
 import com.safeTravel.service.TripService;
-import com.safeTravel.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

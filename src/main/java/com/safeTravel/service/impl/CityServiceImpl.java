@@ -11,10 +11,14 @@ import com.safeTravel.service.CityService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
+import org.springframework.web.client.RestTemplate;
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
+import java.util.Optional;
+
 
 @Slf4j
 @Service
@@ -60,19 +64,25 @@ public class CityServiceImpl implements CityService {
 
     @Override
     public CityDto getByName(String name) {
-        if(name.equals("Oui")) {
-            throw new EntityNotFoundException();
+        Optional<City> city = cityRepository.findByName(name);
+
+        if(!city.isPresent()) {
+            RestTemplate restTemplate = new RestTemplate();
+            ResponseEntity<String> response = restTemplate.getForEntity("https://geo.api.gouv.fr/communes?nom=" + name + "&fields=nom,code,codesPostaux,codeDepartement,codeRegion,population&format=json&geometry=centre", String.class);
+
+            if(!response.getBody().contains("\"nom\":\""+name)) {
+                throw new EntityNotFoundException();
+            } else {
+                City newCity = new City();
+                newCity.setName(name);
+
+                this.cityRepository.save(newCity);
+                return cityMapper.toDto(newCity);
+            }
         }
 
-        City city = cityRepository.findByName(name).orElseGet(() -> {
-            City newCity = new City();
-            newCity.setName(name);
-            return newCity;
-        });
-
-        this.cityRepository.save(city);
-
-        return cityMapper.toDto(city);
+        this.cityRepository.save(city.get());
+        return cityMapper.toDto(city.get());
     }
 
     @Override

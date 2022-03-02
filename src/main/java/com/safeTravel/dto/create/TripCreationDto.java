@@ -1,4 +1,4 @@
-package com.safeTravel.dto.tripsDto;
+package com.safeTravel.dto.create;
 
 import lombok.*;
 
