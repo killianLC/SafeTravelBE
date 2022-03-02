@@ -19,11 +19,11 @@ public class Step {
     @Column
     private LocalDate date;
 
-    @JoinColumn(name = "city_id")
+    @JoinColumn(name = "city_id", referencedColumnName = "id")
     @ManyToOne(fetch = FetchType.LAZY)
     private City city;
 
-    @JoinColumn(name = "trip_id")
+    @JoinColumn(name = "trip_id", referencedColumnName = "id")
     @ManyToOne(fetch = FetchType.LAZY)
     private Trip trip;
 }

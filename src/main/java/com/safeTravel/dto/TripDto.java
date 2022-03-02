@@ -1,12 +1,8 @@
 package com.safeTravel.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.safeTravel.entity.Participant;
-import com.safeTravel.entity.Step;
 import com.safeTravel.entity.User;
 import lombok.*;
 
-import javax.persistence.*;
 import java.util.Set;
 
 @Data
@@ -18,9 +14,8 @@ public class TripDto {
 
     private String description;
 
-    private Long organisateurId;
+    private User organisateur;
 
-    @JsonIgnoreProperties(value = "trip")
     @EqualsAndHashCode.Exclude
     private Set<StepDto> steps;
 }

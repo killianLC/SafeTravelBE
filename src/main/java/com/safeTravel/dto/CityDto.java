@@ -1,10 +1,7 @@
 package com.safeTravel.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
@@ -12,10 +9,18 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
+@JsonIgnoreProperties({"steps","notes"})
 public class CityDto {
     private Long id;
+
     private String name;
-    @JsonIgnoreProperties(value = "city")
+
+    @EqualsAndHashCode.Exclude
     private List<CommentDto> comments;
+
+    @EqualsAndHashCode.Exclude
     private List<NoteDto> notes;
+
+    @EqualsAndHashCode.Exclude
+    private List<StepDto> steps;
 }

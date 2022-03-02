@@ -25,11 +25,11 @@ public class Comment {
     @Column
     private Integer rating;
 
-    @JoinColumn
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
 
-    @JoinColumn
+    @JoinColumn(name = "city_id", referencedColumnName = "id")
     @ManyToOne(fetch = FetchType.LAZY)
     private City city;
 }

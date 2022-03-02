@@ -24,4 +24,7 @@ public class City {
 
     @OneToMany(mappedBy = "city", fetch = FetchType.LAZY)
     private Set<Note> notes;
+
+    @OneToMany(mappedBy = "city", fetch = FetchType.LAZY)
+    private Set<Step> steps;
 }

@@ -12,13 +12,12 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @NoArgsConstructor
+@JsonIgnoreProperties({"city"})
 public class CommentDto {
     private Long id;
     private String description;
     private LocalDate date;
     private Integer rating;
-    @JsonIgnoreProperties(value = "comments")
     private UserDto user;
-    @JsonIgnoreProperties(value = "comments")
     private CityDto city;
 }

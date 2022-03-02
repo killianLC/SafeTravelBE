@@ -22,11 +22,11 @@ public class Note {
     @Column
     private LocalDate date;
 
-    @JoinColumn(name = "city_id", nullable = false)
+    @JoinColumn(name = "city_id", nullable = false, referencedColumnName = "id")
     @ManyToOne(fetch = FetchType.LAZY)
     private City city;
 
-    @JoinColumn(name = "criterion_id", nullable = false)
+    @JoinColumn(name = "criterion_id", nullable = false, referencedColumnName = "id")
     @ManyToOne(fetch = FetchType.LAZY)
     private Criterion criterion;
 }

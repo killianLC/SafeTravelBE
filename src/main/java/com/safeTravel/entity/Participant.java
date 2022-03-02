@@ -15,11 +15,11 @@ public class Participant {
     @Column
     private Long id;
 
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
 
-    @JoinColumn(name = "trip_id")
+    @JoinColumn(name = "trip_id", referencedColumnName = "id")
     @ManyToOne(fetch = FetchType.LAZY)
     private Trip trip;
 

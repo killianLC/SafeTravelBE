@@ -20,10 +20,10 @@ public class Trip {
     @Column
     private String description;
 
-    @OneToMany(mappedBy = "trip", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "trip", fetch = FetchType.LAZY)
     private Set<Step> steps;
 
-    @JoinColumn(name = "organisateur_id")
+    @JoinColumn(name = "organisateur_id", referencedColumnName = "id")
     @ManyToOne(fetch = FetchType.LAZY)
     private User organisateur;
 

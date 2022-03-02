@@ -11,6 +11,7 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIgnoreProperties({"comments","roles","trips"})
 public class UserDto {
     private Long id;
 
@@ -23,13 +24,11 @@ public class UserDto {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
-    @JsonIgnoreProperties("users")
+    @EqualsAndHashCode.Exclude
     private Set<RoleDto> roles;
-
-    @JsonIgnoreProperties("participants")
+    @EqualsAndHashCode.Exclude
     private Set<TripDto> trips;
-
-    @JsonIgnoreProperties("user")
+    @EqualsAndHashCode.Exclude
     private Set<CommentDto> comments;
 }
 
