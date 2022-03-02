@@ -104,7 +104,7 @@ public class CityServiceImpl implements CityService {
 
         if(!city.isPresent()) throw new EntityNotFoundException("La ville n'existe pas");
 
-        Optional<User> user = userRepository.findById(cityId);
+        Optional<User> user = userRepository.findById(userId);
 
         if(!user.isPresent()) throw new EntityNotFoundException("L'utilisateur n'existe pas");
 
@@ -119,7 +119,7 @@ public class CityServiceImpl implements CityService {
 
         if(!city.isPresent()) throw new EntityNotFoundException("La ville n'existe pas");
 
-        Optional<User> user = userRepository.findById(cityId);
+        Optional<User> user = userRepository.findById(userId);
 
         if(!user.isPresent()) throw new EntityNotFoundException("L'utilisateur n'existe pas");
 
@@ -134,7 +134,7 @@ public class CityServiceImpl implements CityService {
 
         if(!city.isPresent()) throw new EntityNotFoundException("La ville n'existe pas");
 
-        Optional<User> user = userRepository.findById(cityId);
+        Optional<User> user = userRepository.findById(userId);
 
         if(!user.isPresent()) throw new EntityNotFoundException("L'utilisateur n'existe pas");
 
