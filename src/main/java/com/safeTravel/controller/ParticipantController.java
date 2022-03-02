@@ -28,10 +28,16 @@ public class ParticipantController {
         this.participantService.create(participantCreationDto);
     }
 
-    @GetMapping("/{tripId}")
+    @GetMapping("/trip/{tripId}")
     @ResponseStatus(HttpStatus.OK)
     public List<ParticipantDto> getAllForTrip(@PathVariable Long tripId) {
         return this.participantService.getAllForTrip(tripId);
+    }
+
+    @GetMapping("/participant/{participantId}")
+    @ResponseStatus(HttpStatus.OK)
+    public ParticipantDto getForParticipant(@PathVariable Long participantId) {
+        return this.participantService.getById(participantId);
     }
 
     @DeleteMapping

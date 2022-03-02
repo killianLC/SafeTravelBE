@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -86,5 +87,12 @@ public class TripController {
     public void delete(@PathVariable("id") Long id) {
         logger.debug("Trip, delete() :{}", id);
         this.tripService.deleteById(id);
+    }
+
+    @GetMapping({"/isParticipant/{tripId}"})
+    @ResponseStatus(HttpStatus.OK)
+    public Boolean isParticipant(@RequestHeader("UtilisateurId") Long utilisateurId, @PathVariable("tripId") Long tripId) {
+        if(utilisateurId == null) throw new AccessDeniedException("L'utilisateur n'est pas connecté");
+        return this.tripService.isParticipant(utilisateurId, tripId);
     }
 }
