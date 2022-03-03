@@ -17,7 +17,10 @@ public class Criterion {
     private Long id;
 
     @Column
-    private String name;
+    private String type;
+
+    @Column
+    private String libelle;
 
     @OneToMany(mappedBy = "criterion")
     private Set<Note> notes;

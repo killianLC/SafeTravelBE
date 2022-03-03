@@ -10,6 +10,9 @@ public interface CityService extends ServiceShared<CityDto, Long> {
     CityDto getByName(String name);
     List<ReducedCityDto> getAllReducedCity();
     Double getRatingAverageByName(String name);
+    Double getMeteoAverageByName(String name);
+    List<Double> getUsersRatingsByName(String name);
+    List<Double> getMeteoRatingsByName(String name);
     void createFavoris(Long cityId, Long userId);
     void deleteFavoris(Long cityId, Long userId);
     Boolean isFavoris(Long cityId, Long userId);

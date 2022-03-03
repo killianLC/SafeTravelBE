@@ -3,10 +3,7 @@ package com.safeTravel.service.impl;
 import com.safeTravel.dto.CityClassementDto;
 import com.safeTravel.dto.CityDto;
 import com.safeTravel.dto.ReducedCityDto;
-import com.safeTravel.entity.City;
-import com.safeTravel.entity.Criterion;
-import com.safeTravel.entity.Note;
-import com.safeTravel.entity.User;
+import com.safeTravel.entity.*;
 import com.safeTravel.mapper.referentiel.CityMapper;
 import com.safeTravel.mapper.referentiel.ReducedCityMapper;
 import com.safeTravel.repository.CityRepository;
@@ -17,7 +14,6 @@ import com.safeTravel.service.CityService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -122,14 +118,18 @@ public class CityServiceImpl implements CityService {
             newNote.setNote(this.calculateNoteForCriterionAndCity(criterion, city));
             this.noteRepository.save(newNote);
         } else {
-            note.get().setNote(this.calculateNoteForCriterionAndCity(criterion, city));
-            this.noteRepository.save(note.get());
+            if(note.get().getNote().equals(0.0)) {
+                note.get().setNote(this.calculateNoteForCriterionAndCity(criterion, city));
+                this.noteRepository.save(note.get());
+            }
         }
     }
 
     public Double calculateNoteForCriterionAndCity(Criterion criterion, City city) {
-        switch(criterion.getName()) {
+
+        switch(criterion.getType()) {
             case "USER_NOTES": return this.getRatingAverageByName(city.getName());
+            case "METEO_NOTES": return this.getMeteoAverageByName(city.getName());
             default: return 0.0;
         }
     }
@@ -138,6 +138,22 @@ public class CityServiceImpl implements CityService {
     public Double getRatingAverageByName(String name) {
         return cityRepository.getRatingAverageByName(name);
     }
+
+    @Override
+    public Double getMeteoAverageByName(String name) {
+        return cityRepository.getMeteoAverageByName(name);
+    }
+
+    @Override
+    public List<Double> getUsersRatingsByName(String name) {
+        return cityRepository.getUsersRatingsByName(name);
+    }
+
+    @Override
+    public List<Double> getMeteoRatingsByName(String name) {
+        return cityRepository.getMeteoRatingsByName(name);
+    }
+
 
     @Override
     public List<CityClassementDto> getTop10ByNotesDesc() {
