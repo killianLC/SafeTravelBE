@@ -94,7 +94,7 @@ public class TripServiceImpl implements TripService {
 
         if(!user.isPresent() || !trip.isPresent()) throw new EntityNotFoundException("L'utilisateur ou le voyage n'existe pas");
 
-        if(user.get().getId().equals(trip.get().getOrganisateur().getId())) throw new EntityExistsException("L'organisateur ne peux pas rejoindre le voyage");
+        if(user.get().getId().equals(trip.get().getOrganisateur().getId())) return false;
 
         Optional<Participant> participant = this.participantRepository.findByTripAndUser(trip.get(), user.get());
 
