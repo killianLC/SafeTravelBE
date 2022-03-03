@@ -118,11 +118,6 @@ public class CityServiceImpl implements CityService {
             newNote.setCity(city);
             newNote.setNote(this.calculateNoteForCriterionAndCity(criterion, city));
             this.noteRepository.save(newNote);
-        } else {
-            if(note.get().getNote().equals(0.0)) {
-                note.get().setNote(this.calculateNoteForCriterionAndCity(criterion, city));
-                this.noteRepository.save(note.get());
-            }
         }
     }
 
@@ -131,7 +126,7 @@ public class CityServiceImpl implements CityService {
         switch(criterion.getType()) {
             case "USER_NOTES": return this.getRatingAverageByName(city.getName());
             case "METEO_NOTES": return this.getMeteoAverageByName(city.getName());
-            default: return 0.0;
+            default: return null;
         }
     }
 
