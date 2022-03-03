@@ -2,6 +2,7 @@ package com.safeTravel.controller;
 
 import com.safeTravel.dto.CityClassementDto;
 import com.safeTravel.dto.CityDto;
+import com.safeTravel.dto.NoteDto;
 import com.safeTravel.dto.ReducedCityDto;
 import com.safeTravel.service.CityService;
 import lombok.extern.slf4j.Slf4j;
@@ -68,7 +69,7 @@ public class PublicController {
      *
      * @return Double
      */
-    @GetMapping({"/city/average/{name}"})
+    @GetMapping({"/city/{name}/average"})
     @ResponseStatus(HttpStatus.OK)
     public HashMap getAverageByName(@PathVariable("name") String name) {
         HashMap<String, Object> response = new HashMap<>();
@@ -84,17 +85,17 @@ public class PublicController {
     }
 
     /**
-     * Endpoint /city/average/{nom} type GET
+     * Endpoint /city/notes/{nom} type GET
      *
      * @return Double
      */
-    @GetMapping({"/city/all_average/{name}"})
+    @GetMapping({"/city/{name}/notes"})
     @ResponseStatus(HttpStatus.OK)
     public HashMap getNotesByName(@PathVariable("name") String name) {
         HashMap<String, Object> response = new HashMap<>();
 
-        List<Double> ratings = cityService.getUsersRatingsByName(name);
-        List<Double> meteo = cityService.getMeteoRatingsByName(name);
+        List<NoteDto> ratings = cityService.getUsersRatingsByName(name);
+        List<NoteDto> meteo = cityService.getMeteoRatingsByName(name);
 
         response.put("ratings", ratings);
         response.put("meteo", meteo);

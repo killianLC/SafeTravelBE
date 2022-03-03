@@ -18,6 +18,6 @@ public interface NoteRepository extends JpaRepository<Note, Long> {
     Optional<Note> findByCriterionAndDateAndCity(Criterion criterion, LocalDate date, City city);
     List<Note> findAllByCriterionAndCity(Criterion criterion, City city);
 
-    @Query(value="SELECT AVG(note.note) AS average_criterion FROM note, criterion, city WHERE criterion.name = :criterionName AND note.criterion_id = criterion.id AND note.city_id = :cityId", nativeQuery = true)
+    @Query(value="SELECT AVG(note.note) AS average_criterion FROM note, criterion, city WHERE criterion.type = :criterionName AND note.criterion_id = criterion.id AND note.city_id = :cityId", nativeQuery = true)
     Double calculateGlobalNoteForCriterion(@Param("criterionName") String criterionName, @Param("cityId") Long cityId);
 }

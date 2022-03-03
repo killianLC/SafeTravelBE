@@ -2,6 +2,7 @@ package com.safeTravel.service.impl;
 
 import com.safeTravel.dto.CityClassementDto;
 import com.safeTravel.dto.CityDto;
+import com.safeTravel.dto.NoteDto;
 import com.safeTravel.dto.ReducedCityDto;
 import com.safeTravel.entity.*;
 import com.safeTravel.mapper.referentiel.CityMapper;
@@ -145,12 +146,12 @@ public class CityServiceImpl implements CityService {
     }
 
     @Override
-    public List<Double> getUsersRatingsByName(String name) {
+    public List<NoteDto> getUsersRatingsByName(String name) {
         return cityRepository.getUsersRatingsByName(name);
     }
 
     @Override
-    public List<Double> getMeteoRatingsByName(String name) {
+    public List<NoteDto> getMeteoRatingsByName(String name) {
         return cityRepository.getMeteoRatingsByName(name);
     }
 
