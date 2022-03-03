@@ -72,7 +72,7 @@ public class CommentController {
      *
      * @param id id of the deleted comment
      */
-    @DeleteMapping({"/{id}"})
+    @PostMapping({"/{id}"})
     @ResponseStatus(HttpStatus.OK)
     public void delete(@PathVariable("id") Long id) {
         this.commentService.deleteById(id);
