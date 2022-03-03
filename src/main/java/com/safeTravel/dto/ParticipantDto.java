@@ -12,7 +12,8 @@ import lombok.Setter;
 public class ParticipantDto {
     private Long id;
 
-    private ReducedUserDto user;
+    @JsonIgnoreProperties({"comments","roles","trips","citiesFavoris"})
+    private UserDto user;
 
     private Boolean statut;
 }
