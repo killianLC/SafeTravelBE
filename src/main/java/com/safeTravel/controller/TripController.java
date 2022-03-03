@@ -1,11 +1,9 @@
 package com.safeTravel.controller;
 
-import com.safeTravel.dto.StepDto;
 import com.safeTravel.dto.StepWithoutTripDto;
 import com.safeTravel.dto.TripDto;
 import com.safeTravel.dto.create.StepCreationDto;
 import com.safeTravel.dto.create.TripCreationDto;
-import com.safeTravel.dto.delete.StepDeleteDto;
 import com.safeTravel.dto.update.TripUpdateDescriptionDto;
 import com.safeTravel.service.TripService;
 import lombok.extern.slf4j.Slf4j;
@@ -106,7 +104,7 @@ public class TripController {
      *
      * @param id id of the deleted trip
      */
-    @DeleteMapping({"/{id}"})
+    @PostMapping({"/delete/{id}"})
     @ResponseStatus(HttpStatus.OK)
     public void delete(@PathVariable("id") Long id) {
         logger.debug("Trip, delete() :{}", id);

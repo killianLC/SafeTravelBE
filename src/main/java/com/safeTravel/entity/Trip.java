@@ -27,6 +27,6 @@ public class Trip {
     @ManyToOne
     private User organisateur;
 
-    @OneToMany(mappedBy = "trip")
+    @OneToMany(mappedBy = "trip", cascade = CascadeType.REMOVE)
     private Set<Participant> participants;
 }
