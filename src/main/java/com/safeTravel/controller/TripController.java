@@ -106,9 +106,9 @@ public class TripController {
      */
     @PostMapping({"/delete/{id}"})
     @ResponseStatus(HttpStatus.OK)
-    public void delete(@PathVariable("id") Long id) {
-        logger.debug("Trip, delete() :{}", id);
-        this.tripService.deleteById(id);
+    public void delete(@RequestHeader("UtilisateurId") Long utilisateurId,@PathVariable("id") Long id) {
+        logger.debug("Trip, delete() :{},{}",utilisateurId, id);
+        this.tripService.deleteTripSecure(utilisateurId,id);
     }
 
     @GetMapping({"/isParticipant/{tripId}"})
