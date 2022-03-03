@@ -1,10 +1,14 @@
 package com.safeTravel.service.impl;
 
+import com.safeTravel.dto.StepDto;
+import com.safeTravel.dto.StepWithoutTripDto;
 import com.safeTravel.dto.TripDto;
 import com.safeTravel.dto.create.StepCreationDto;
 import com.safeTravel.dto.create.TripCreationDto;
 import com.safeTravel.dto.delete.StepDeleteDto;
 import com.safeTravel.entity.*;
+import com.safeTravel.mapper.referentiel.StepMapper;
+import com.safeTravel.mapper.referentiel.StepWithoutTripMapper;
 import com.safeTravel.mapper.referentiel.TripMapper;
 import com.safeTravel.repository.*;
 import com.safeTravel.service.TripService;
@@ -33,6 +37,8 @@ public class TripServiceImpl implements TripService {
     private ParticipantRepository participantRepository;
     @Autowired
     private StepRepository stepRepository;
+    @Autowired
+    private StepWithoutTripMapper stepWithoutTripMapper;
 
     /**
      * {@inheritDoc}
@@ -134,7 +140,7 @@ public class TripServiceImpl implements TripService {
     }
 
     @Override
-    public void createStep(Long utilisateurId, Long tripId, StepCreationDto stepCreationDto) {
+    public StepWithoutTripDto createStep(Long utilisateurId, Long tripId, StepCreationDto stepCreationDto) {
         Optional<Trip> trip = this.tripRepository.findById(tripId);
 
         if (!trip.isPresent()) throw new EntityNotFoundException("Le voyage n'existe pas");
@@ -149,8 +155,7 @@ public class TripServiceImpl implements TripService {
         if(!city.isPresent()) throw new EntityNotFoundException("Une ville pour une des étapes n'existe pas");
 
         newStep.setCity(city.get());
-        trip.get().getSteps().add(newStep);
 
-        this.tripRepository.save(trip.get());
+        return this.stepWithoutTripMapper.toDto(this.stepRepository.save(newStep));
     }
 }

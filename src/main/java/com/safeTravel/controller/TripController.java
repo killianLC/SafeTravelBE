@@ -1,5 +1,7 @@
 package com.safeTravel.controller;
 
+import com.safeTravel.dto.StepDto;
+import com.safeTravel.dto.StepWithoutTripDto;
 import com.safeTravel.dto.TripDto;
 import com.safeTravel.dto.create.StepCreationDto;
 import com.safeTravel.dto.create.TripCreationDto;
@@ -88,8 +90,8 @@ public class TripController {
 
     @PostMapping("/{tripId}/step/create")
     @ResponseStatus(HttpStatus.OK)
-    public void createStep(@RequestHeader("UtilisateurId") Long utilisateurId, @PathVariable Long tripId, @RequestBody StepCreationDto stepCreationDto) {
-        this.tripService.createStep(utilisateurId, tripId, stepCreationDto);
+    public StepWithoutTripDto createStep(@RequestHeader("UtilisateurId") Long utilisateurId, @PathVariable Long tripId, @RequestBody StepCreationDto stepCreationDto) {
+        return this.tripService.createStep(utilisateurId, tripId, stepCreationDto);
     }
 
     /**
