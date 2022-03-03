@@ -158,4 +158,15 @@ public class TripServiceImpl implements TripService {
 
         return this.stepWithoutTripMapper.toDto(this.stepRepository.save(newStep));
     }
+
+    @Override
+    public void modifyDescription(Long utilisateurId, Long tripId, String description) {
+        Optional<Trip> trip = this.tripRepository.findById(tripId);
+
+        if (!trip.isPresent()) throw new EntityNotFoundException("Le voyage n'existe pas");
+        if(!trip.get().getOrganisateur().getId().equals(utilisateurId)) throw new AccessDeniedException("Cet utilisateur n'est pas l'organisateur du voyage");
+
+        trip.get().setDescription(description);
+        this.tripRepository.save(trip.get());
+    }
 }

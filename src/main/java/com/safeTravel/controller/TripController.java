@@ -6,6 +6,7 @@ import com.safeTravel.dto.TripDto;
 import com.safeTravel.dto.create.StepCreationDto;
 import com.safeTravel.dto.create.TripCreationDto;
 import com.safeTravel.dto.delete.StepDeleteDto;
+import com.safeTravel.dto.update.TripUpdateDescriptionDto;
 import com.safeTravel.service.TripService;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
@@ -92,6 +93,12 @@ public class TripController {
     @ResponseStatus(HttpStatus.OK)
     public StepWithoutTripDto createStep(@RequestHeader("UtilisateurId") Long utilisateurId, @PathVariable Long tripId, @RequestBody StepCreationDto stepCreationDto) {
         return this.tripService.createStep(utilisateurId, tripId, stepCreationDto);
+    }
+
+    @PostMapping("/{tripId}/description")
+    @ResponseStatus(HttpStatus.OK)
+    public void modifyDescription(@RequestHeader("UtilisateurId") Long utilisateurId, @PathVariable Long tripId, @RequestBody TripUpdateDescriptionDto tripUpdateDescriptionDto) {
+        this.tripService.modifyDescription(utilisateurId, tripId, tripUpdateDescriptionDto.getDescription());
     }
 
     /**

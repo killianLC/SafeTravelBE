@@ -16,4 +16,5 @@ public interface TripService extends ServiceShared<TripDto, Long> {
     Boolean isParticipant(Long utilisateurId, Long tripId);
     void deleteStep(Long utilisateurId, Long tripId, Long stepId);
     StepWithoutTripDto createStep(Long utilisateurId, Long tripId, StepCreationDto stepCreationDto);
+    void modifyDescription(Long utilisateurId, Long tripId, String description);
 }
