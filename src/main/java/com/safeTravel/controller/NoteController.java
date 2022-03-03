@@ -26,7 +26,7 @@ public class NoteController {
      * @return NoteDto found thanks to his id
      */
     @GetMapping({"/{id}"})
-    @ResponseStatus(HttpStatus.FOUND)
+    @ResponseStatus(HttpStatus.OK)
     public NoteDto getById(@PathVariable("id") Long id) {
         NoteDto n = noteService.getById(id);
         logger.debug("Note, getById() :{}", n);
