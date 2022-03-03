@@ -1,16 +1,21 @@
 package com.safeTravel.controller;
 
 import com.safeTravel.dto.CityClassementDto;
+import com.safeTravel.dto.CityDto;
 import com.safeTravel.dto.ReducedCityDto;
 import com.safeTravel.service.CityService;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequestMapping({"/public"})
 public class PublicController {
@@ -37,5 +42,23 @@ public class PublicController {
         List<ReducedCityDto> cities = cityService.getAllReducedCity();
         logger.info("City, getAll() :{}", cities);
         return cities;
+    }
+
+    /**
+     * Endpoint /city/{nom} type GET
+     *
+     * @return UserDto found thanks to his id
+     */
+    @GetMapping({"/{name}"})
+    @ResponseStatus(HttpStatus.OK)
+    public CityDto getByName(@PathVariable("name") String name) {
+        try {
+
+        } catch (EntityNotFoundException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        } catch (Exception e) {
+            log.debug(e.getMessage());
+        }
+        return cityService.getByName(name);
     }
 }

@@ -4,10 +4,14 @@ import com.safeTravel.dto.CityClassementDto;
 import com.safeTravel.dto.CityDto;
 import com.safeTravel.dto.ReducedCityDto;
 import com.safeTravel.entity.City;
+import com.safeTravel.entity.Criterion;
+import com.safeTravel.entity.Note;
 import com.safeTravel.entity.User;
 import com.safeTravel.mapper.referentiel.CityMapper;
 import com.safeTravel.mapper.referentiel.ReducedCityMapper;
 import com.safeTravel.repository.CityRepository;
+import com.safeTravel.repository.CriterionRepository;
+import com.safeTravel.repository.NoteRepository;
 import com.safeTravel.repository.UserRepository;
 import com.safeTravel.service.CityService;
 import lombok.extern.slf4j.Slf4j;
@@ -18,6 +22,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import javax.persistence.EntityNotFoundException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,6 +42,12 @@ public class CityServiceImpl implements CityService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private NoteRepository noteRepository;
+
+    @Autowired
+    private CriterionRepository criterionRepository;
 
     @Override
     public List<CityDto> getAll() {
@@ -81,13 +92,46 @@ public class CityServiceImpl implements CityService {
                 City newCity = new City();
                 newCity.setName(name);
 
+                List<Criterion> criterionList = this.criterionRepository.findAll();
+                criterionList.forEach((criterion) -> {
+                    this.addIfNotExistNoteByCriterionAndCurrentDate(newCity, criterion, LocalDate.now());
+                });
+
                 this.cityRepository.save(newCity);
                 return cityMapper.toDto(newCity);
             }
         }
 
+        List<Criterion> criterionList = this.criterionRepository.findAll();
+        criterionList.forEach((criterion) -> {
+            this.addIfNotExistNoteByCriterionAndCurrentDate(city.get(), criterion, LocalDate.now());
+        });
+
         this.cityRepository.save(city.get());
         return cityMapper.toDto(city.get());
+    }
+
+    public void addIfNotExistNoteByCriterionAndCurrentDate(City city, Criterion criterion, LocalDate currentDate) {
+        Optional<Note> note = this.noteRepository.findByCriterionAndDateAndCity(criterion, currentDate, city);
+
+        if(!note.isPresent()) {
+            Note newNote = new Note();
+            newNote.setCriterion(criterion);
+            newNote.setDate(currentDate);
+            newNote.setCity(city);
+            newNote.setNote(this.calculateNoteForCriterionAndCity(criterion, city));
+            this.noteRepository.save(newNote);
+        } else {
+            note.get().setNote(this.calculateNoteForCriterionAndCity(criterion, city));
+            this.noteRepository.save(note.get());
+        }
+    }
+
+    public Double calculateNoteForCriterionAndCity(Criterion criterion, City city) {
+        switch(criterion.getName()) {
+            case "USER_NOTES": return this.getRatingAverageByName(city.getName());
+            default: return 0.0;
+        }
     }
 
     @Override
@@ -96,7 +140,9 @@ public class CityServiceImpl implements CityService {
     }
 
     @Override
-    public List<CityClassementDto> getTop10ByNotesDesc() { return cityRepository.findTop10ByOrderByNotesDesc(PageRequest.of(0,10)); }
+    public List<CityClassementDto> getTop10ByNotesDesc() {
+        return cityRepository.findTop10ByOrderByNotesDesc(PageRequest.of(0,10));
+    }
 
     @Override
     public void createFavoris(Long cityId, Long userId) {
