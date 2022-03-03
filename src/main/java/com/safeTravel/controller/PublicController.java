@@ -1,6 +1,11 @@
 package com.safeTravel.controller;
 
 import com.safeTravel.dto.*;
+import com.safeTravel.entity.City;
+import com.safeTravel.entity.Note;
+import com.safeTravel.mapper.referentiel.CityMapper;
+import com.safeTravel.repository.CityRepository;
+import com.safeTravel.repository.RoleRepository;
 import com.safeTravel.service.CityService;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
@@ -19,6 +24,12 @@ import java.util.List;
 @RequestMapping({"/public"})
 public class PublicController {
     private static final Logger logger = LoggerFactory.getLogger(PublicController.class);
+
+    @Autowired
+    CityRepository cityRepository;
+
+    @Autowired
+    private CityMapper cityMapper;
 
     @Autowired
     private CityService cityService;
@@ -50,15 +61,14 @@ public class PublicController {
     @GetMapping({"/city/{name}"})
     @ResponseStatus(HttpStatus.OK)
     public CityDto getByName(@PathVariable("name") String name) {
-        CityDto city = new CityDto();
+        City city = new City();
         try {
-            city = cityService.getByName(name);
-        } catch (EntityNotFoundException e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+            return cityService.getByName(name);
         } catch (Exception e) {
-            logger.debug(e.getMessage());
+            city.setName(name);
+            cityRepository.save(city);
         }
-        return city;
+        return cityMapper.toDto(city);
     }
 
     /**

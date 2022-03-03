@@ -1,6 +1,5 @@
 package com.safeTravel.repository;
 
-import com.safeTravel.dto.TripDto;
 import com.safeTravel.dto.TripQueryDto;
 import com.safeTravel.entity.Participant;
 import com.safeTravel.entity.Trip;
