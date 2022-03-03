@@ -47,10 +47,10 @@ public class TripController {
         return t;
     }
 
-    @GetMapping({"/user/{userId}"})
+    @GetMapping({"/user"})
     @ResponseStatus(HttpStatus.OK)
-    public List<TripDto> getUserTrips(@PathVariable Long userId) {
-        return this.tripService.getUserTrips(userId);
+    public List<TripDto> getUserTrips(@RequestHeader("UtilisateurId") Long utilisateurId) {
+        return this.tripService.getUserTrips(utilisateurId);
     }
 
     /**
