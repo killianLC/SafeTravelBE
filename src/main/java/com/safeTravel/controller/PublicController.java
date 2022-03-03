@@ -1,9 +1,6 @@
 package com.safeTravel.controller;
 
-import com.safeTravel.dto.CityClassementDto;
-import com.safeTravel.dto.CityDto;
-import com.safeTravel.dto.NoteDto;
-import com.safeTravel.dto.ReducedCityDto;
+import com.safeTravel.dto.*;
 import com.safeTravel.service.CityService;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
@@ -94,8 +91,8 @@ public class PublicController {
     public HashMap getNotesByName(@PathVariable("name") String name) {
         HashMap<String, Object> response = new HashMap<>();
 
-        List<NoteDto> ratings = cityService.getUsersRatingsByName(name);
-        List<NoteDto> meteo = cityService.getMeteoRatingsByName(name);
+        List<NoteQueryDto> ratings = cityService.getUsersRatingsByName(name);
+        List<NoteQueryDto> meteo = cityService.getMeteoRatingsByName(name);
 
         response.put("ratings", ratings);
         response.put("meteo", meteo);

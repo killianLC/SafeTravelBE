@@ -2,6 +2,7 @@ package com.safeTravel.service.impl;
 
 import com.safeTravel.dto.ParticipantDto;
 import com.safeTravel.dto.TripDto;
+import com.safeTravel.dto.TripQueryDto;
 import com.safeTravel.dto.create.ParticipantCreationDto;
 import com.safeTravel.dto.delete.ParticipantDeleteDto;
 import com.safeTravel.dto.update.ParticipantUpdateDto;
@@ -120,7 +121,7 @@ public class ParticipantServiceImpl implements ParticipantService {
     }
 
     @Override
-    public List<TripDto> getTripsUserParticipate(Long userUid) {
+    public List<TripQueryDto> getTripsUserParticipate(Long userUid) {
         return this.participantRepository.getTripsByUserId(userUid);
     }
 }

@@ -1,7 +1,6 @@
 package com.safeTravel.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.safeTravel.entity.Trip;
 import lombok.*;
 
 import java.util.Set;
@@ -10,11 +9,6 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 public class TripDto {
-
-    public TripDto(Long id, String description) {
-        this.id = id;
-        this.description = description;
-    }
 
     private Long id;
 

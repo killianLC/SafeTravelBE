@@ -1,6 +1,7 @@
 package com.safeTravel.repository;
 
 import com.safeTravel.dto.TripDto;
+import com.safeTravel.dto.TripQueryDto;
 import com.safeTravel.entity.Participant;
 import com.safeTravel.entity.Trip;
 import com.safeTravel.entity.User;
@@ -19,6 +20,6 @@ public interface ParticipantRepository extends JpaRepository<Participant, Long> 
     List<Participant> findAllByTrip(Trip trip);
 
     @Transactional
-    @Query(value="SELECT new com.safeTravel.dto.TripDto(trip.id, trip.description) FROM User user, Trip trip, Participant participant WHERE user.id = :userUid AND user.id = participant.user.id AND trip.organisateur.id != :userUid")
-    List<TripDto> getTripsByUserId(@Param("userUid") Long userUid);
+    @Query(value="SELECT new com.safeTravel.dto.TripQueryDto(trip.id, trip.description) FROM User user, Trip trip, Participant participant WHERE user.id = :userUid AND user.id = participant.user.id AND trip.organisateur.id != :userUid")
+    List<TripQueryDto> getTripsByUserId(@Param("userUid") Long userUid);
 }

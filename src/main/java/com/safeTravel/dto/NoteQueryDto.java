@@ -11,9 +11,8 @@ import java.time.LocalDate;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class NoteDto {
+public class NoteQueryDto {
     private Long id;
     private LocalDate date;
-    private CriterionDto criterion;
     private Double note;
 }
