@@ -1,20 +1,21 @@
 package com.safeTravel.service.impl;
 
 import com.safeTravel.dto.TripDto;
+import com.safeTravel.dto.create.StepCreationDto;
 import com.safeTravel.dto.create.TripCreationDto;
+import com.safeTravel.dto.delete.StepDeleteDto;
 import com.safeTravel.entity.*;
 import com.safeTravel.mapper.referentiel.TripMapper;
-import com.safeTravel.repository.CityRepository;
-import com.safeTravel.repository.ParticipantRepository;
-import com.safeTravel.repository.TripRepository;
-import com.safeTravel.repository.UserRepository;
+import com.safeTravel.repository.*;
 import com.safeTravel.service.TripService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
-import javax.persistence.EntityExistsException;
 import javax.persistence.EntityNotFoundException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class TripServiceImpl implements TripService {
@@ -30,6 +31,8 @@ public class TripServiceImpl implements TripService {
     private CityRepository cityRepository;
     @Autowired
     private ParticipantRepository participantRepository;
+    @Autowired
+    private StepRepository stepRepository;
 
     /**
      * {@inheritDoc}
@@ -112,5 +115,42 @@ public class TripServiceImpl implements TripService {
     @Override
     public List<TripDto> getUserTrips(Long userId) {
         return this.tripMapper.toDtos(this.tripRepository.findAllByOrganisateurId(userId));
+    }
+
+    @Override
+    public void deleteStep(Long utilisateurId, Long tripId, Long stepId) {
+        Optional<Trip> trip = this.tripRepository.findById(tripId);
+
+        if (!trip.isPresent()) throw new EntityNotFoundException("Le voyage n'existe pas");
+        if(!trip.get().getOrganisateur().getId().equals(utilisateurId)) throw new AccessDeniedException("Cet utilisateur n'est pas l'organisateur du voyage");
+
+        Optional<Step> step = trip.get().getSteps().stream().filter((s -> s.getId().equals(stepId))).findFirst();
+        if(!step.isPresent()) throw new EntityNotFoundException("L'étape n'existe pas");
+
+        trip.get().getSteps().remove(step.get());
+
+        this.tripRepository.save(trip.get());
+        this.stepRepository.deleteById(step.get().getId());
+    }
+
+    @Override
+    public void createStep(Long utilisateurId, Long tripId, StepCreationDto stepCreationDto) {
+        Optional<Trip> trip = this.tripRepository.findById(tripId);
+
+        if (!trip.isPresent()) throw new EntityNotFoundException("Le voyage n'existe pas");
+        if(!trip.get().getOrganisateur().getId().equals(utilisateurId)) throw new AccessDeniedException("Cet utilisateur n'est pas l'organisateur du voyage");
+
+
+        Step newStep = new Step();
+        newStep.setTrip(trip.get());
+        newStep.setDate(stepCreationDto.getDate());
+
+        Optional<City> city = this.cityRepository.findByName(stepCreationDto.getCityName());
+        if(!city.isPresent()) throw new EntityNotFoundException("Une ville pour une des étapes n'existe pas");
+
+        newStep.setCity(city.get());
+        trip.get().getSteps().add(newStep);
+
+        this.tripRepository.save(trip.get());
     }
 }

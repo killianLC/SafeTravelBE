@@ -1,7 +1,9 @@
 package com.safeTravel.controller;
 
 import com.safeTravel.dto.TripDto;
+import com.safeTravel.dto.create.StepCreationDto;
 import com.safeTravel.dto.create.TripCreationDto;
+import com.safeTravel.dto.delete.StepDeleteDto;
 import com.safeTravel.service.TripService;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
@@ -50,6 +52,7 @@ public class TripController {
     @GetMapping({"/user"})
     @ResponseStatus(HttpStatus.OK)
     public List<TripDto> getUserTrips(@RequestHeader("UtilisateurId") Long utilisateurId) {
+        if(utilisateurId == null) throw new AccessDeniedException("L'utilisateur n'est pas connecté");
         return this.tripService.getUserTrips(utilisateurId);
     }
 
@@ -75,6 +78,18 @@ public class TripController {
         TripDto t = this.tripService.update(tripDto);
         logger.debug("Trip, update() :{}", t);
         return t;
+    }
+
+    @PostMapping("/{tripId}/step/delete/{stepId}")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteStep(@RequestHeader("UtilisateurId") Long utilisateurId, @PathVariable Long tripId, @PathVariable Long stepId) {
+        this.tripService.deleteStep(utilisateurId, tripId, stepId);
+    }
+
+    @PostMapping("/{tripId}/step/create")
+    @ResponseStatus(HttpStatus.OK)
+    public void createStep(@RequestHeader("UtilisateurId") Long utilisateurId, @PathVariable Long tripId, @RequestBody StepCreationDto stepCreationDto) {
+        this.tripService.createStep(utilisateurId, tripId, stepCreationDto);
     }
 
     /**

@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -97,7 +98,8 @@ public class UserController {
      */
     @PostMapping({"/update_firstname_lastname"})
     @ResponseStatus(HttpStatus.OK)
-    public void updateFirstnameLastname(@RequestBody UserDto userDto) {
+    public void updateFirstnameLastname(@RequestHeader("UtilisateurId") Long utilisateurId, @RequestBody UserDto userDto) {
+        if(!utilisateurId.equals(userDto.getId())) throw new AccessDeniedException("Action impossible");
         logger.debug("User, updateFirstnameAndLastname(): {}", userDto.getId());
         userService.updateFirstnameAndLastname(userDto.getId(), userDto.getFirstname(), userDto.getLastname());
     }
@@ -107,7 +109,8 @@ public class UserController {
      */
     @PostMapping({"/update_password"})
     @ResponseStatus(HttpStatus.OK)
-    public void updatePassword(@RequestBody UserDto userDto) {
+    public void updatePassword(@RequestHeader("UtilisateurId") Long utilisateurId, @RequestBody UserDto userDto) {
+        if(!utilisateurId.equals(userDto.getId())) throw new AccessDeniedException("Action impossible");
         logger.debug("User, updatePassword(): {}", userDto.getId());
         userDto.setPassword(encoder.encode(userDto.getPassword()));
         userService.updatePassword(userDto.getId(), userDto.getPassword());

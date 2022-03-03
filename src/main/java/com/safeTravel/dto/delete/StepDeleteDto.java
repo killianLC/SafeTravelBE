@@ -1,6 +1,5 @@
 package com.safeTravel.dto.delete;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -8,8 +7,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class FavorisDeleteDto {
-    private Long userId;
+public class StepDeleteDto {
+    private Long stepId;
 
-    private Long favorisId;
+    private Long tripId;
 }
