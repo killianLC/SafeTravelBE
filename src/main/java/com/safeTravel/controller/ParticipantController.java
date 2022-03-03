@@ -40,13 +40,13 @@ public class ParticipantController {
         return this.participantService.getById(participantId);
     }
 
-    @DeleteMapping
+    @PostMapping("/delete")
     @ResponseStatus(HttpStatus.OK)
     public void delete(@RequestBody ParticipantDeleteDto participantDeleteDto) {
         this.participantService.deleteByIdForATrip(participantDeleteDto);
     }
 
-    @PatchMapping
+    @PostMapping("/accept")
     @ResponseStatus(HttpStatus.OK)
     public void acceptParticipant(@RequestBody ParticipantUpdateDto participantUpdateDto) {
         this.participantService.acceptParticipant(participantUpdateDto);
