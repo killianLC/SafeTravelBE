@@ -50,14 +50,16 @@ public class CityController {
     @GetMapping({"/{name}"})
     @ResponseStatus(HttpStatus.OK)
     public CityDto getByName(@PathVariable("name") String name) {
+        CityDto city = new CityDto();
         try {
-
+            city = cityService.getByName(name);
         } catch (EntityNotFoundException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
             log.debug(e.getMessage());
         }
-        return cityService.getByName(name);
+
+        return city;
     }
 
     /**
