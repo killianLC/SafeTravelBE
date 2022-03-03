@@ -25,7 +25,7 @@ public class RoleController {
      * @return RoleDto found thanks to his id
      */
     @GetMapping({"/{id}"})
-    @ResponseStatus(HttpStatus.FOUND)
+    @ResponseStatus(HttpStatus.OK)
     public RoleDto getById(@PathVariable("id") Long id) {
         RoleDto r = roleService.getById(id);
         logger.debug("Role, getById() :{}", r);

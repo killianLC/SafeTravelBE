@@ -1,11 +1,13 @@
 package com.safeTravel.controller;
 
 import com.safeTravel.dto.CommentDto;
+import com.safeTravel.dto.UserDto;
 import com.safeTravel.service.impl.CommentServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,7 +32,7 @@ public class CommentController {
      * @return CommentDto found thanks to his id
      */
     @GetMapping({"/{id}"})
-    @ResponseStatus(HttpStatus.FOUND)
+    @ResponseStatus(HttpStatus.OK)
     public CommentDto getById(@PathVariable("id") Long id) {
         return commentService.getById(id);
     }
@@ -49,17 +51,17 @@ public class CommentController {
      * @return CommentDto created
      */
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseStatus(HttpStatus.OK)
     public CommentDto create(@RequestBody CommentDto commentDto) {
         return this.commentService.create(commentDto);
     }
 
     /**
-     * Endpoint /comments type PUT
+     * Endpoint /comments type POST
      *
      * @return CommentDto updated
      */
-    @PutMapping
+    @PostMapping({"/update"})
     @ResponseStatus(HttpStatus.OK)
     public CommentDto update(@RequestBody CommentDto commentDto) {
         return this.commentService.update(commentDto);
