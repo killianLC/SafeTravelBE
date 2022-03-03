@@ -85,7 +85,7 @@ public class ParticipantServiceImpl implements ParticipantService {
         Optional<Participant> participantOptional = this.participantRepository.findById(participantUpdateDto.getParticipantId());
         Optional<Trip> tripOptional = this.tripRepository.findById(participantUpdateDto.getTripId());
 
-        if(!tripOptional.isPresent() && !participantOptional.isPresent()) throw new EntityNotFoundException("L'utilisateur ou le voyage n'existe pas");
+        if(!tripOptional.isPresent() || !participantOptional.isPresent()) throw new EntityNotFoundException("L'utilisateur ou le voyage n'existe pas");
 
         if(!participantOptional.get().getTrip().getId().equals(tripOptional.get().getId())) throw new AccessDeniedException("Ce participant ne participe pas au trip indiqué");
 
