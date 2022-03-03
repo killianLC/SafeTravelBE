@@ -13,13 +13,13 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.HashMap;
 import java.util.List;
 
 @Slf4j
 @RestController
 @RequestMapping({"/public"})
 public class PublicController {
-
     private static final Logger logger = LoggerFactory.getLogger(PublicController.class);
 
     @Autowired
@@ -45,20 +45,39 @@ public class PublicController {
     }
 
     /**
-     * Endpoint /city/{nom} type GET
+     * Endpoint /cities/{nom} type GET
      *
-     * @return UserDto found thanks to his id
+     * @return CityDto found thanks to his id
      */
-    @GetMapping({"/{name}"})
+    @GetMapping({"/city/{name}"})
     @ResponseStatus(HttpStatus.OK)
     public CityDto getByName(@PathVariable("name") String name) {
+        CityDto city = new CityDto();
         try {
-
+            city = cityService.getByName(name);
         } catch (EntityNotFoundException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
-            log.debug(e.getMessage());
+            logger.debug(e.getMessage());
         }
-        return cityService.getByName(name);
+        return city;
+    }
+
+    /**
+     * Endpoint /city/average/{nom} type GET
+     *
+     * @return Double
+     */
+    @GetMapping({"/city/average/{name}"})
+    @ResponseStatus(HttpStatus.OK)
+    public HashMap getAverageByName(@PathVariable("name") String name) {
+        HashMap<String, Object> response = new HashMap<>();
+
+        Double ratingAverage = cityService.getRatingAverageByName(name);
+
+        response.put("rating_average", ratingAverage);
+
+        logger.debug("City, getAverageByName() :{}", name);
+        return response;
     }
 }

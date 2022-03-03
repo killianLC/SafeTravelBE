@@ -1,13 +1,10 @@
 package com.safeTravel.service.impl;
 
-import com.safeTravel.dto.StepDto;
 import com.safeTravel.dto.StepWithoutTripDto;
 import com.safeTravel.dto.TripDto;
 import com.safeTravel.dto.create.StepCreationDto;
 import com.safeTravel.dto.create.TripCreationDto;
-import com.safeTravel.dto.delete.StepDeleteDto;
 import com.safeTravel.entity.*;
-import com.safeTravel.mapper.referentiel.StepMapper;
 import com.safeTravel.mapper.referentiel.StepWithoutTripMapper;
 import com.safeTravel.mapper.referentiel.TripMapper;
 import com.safeTravel.repository.*;
@@ -15,11 +12,11 @@ import com.safeTravel.service.TripService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import javax.persistence.EntityNotFoundException;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TripServiceImpl implements TripService {
@@ -168,5 +165,13 @@ public class TripServiceImpl implements TripService {
 
         trip.get().setDescription(description);
         this.tripRepository.save(trip.get());
+    }
+
+    @Override
+    public void deleteTripSecure(Long organisateurIdTrip, Long tripId){
+        Optional<Trip> trip = this.tripRepository.findById(tripId);
+        if (!trip.isPresent()) throw new EntityNotFoundException("Le voyage n'existe pas");
+        if(!trip.get().getOrganisateur().getId().equals(organisateurIdTrip)) throw new AccessDeniedException("Cet utilisateur n'est pas l'organisateur du voyage");
+        this.tripRepository.deleteById(tripId);
     }
 }
