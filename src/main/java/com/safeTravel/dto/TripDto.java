@@ -13,7 +13,7 @@ public class TripDto {
 
     private String description;
 
-    @JsonIgnoreProperties({"comments","roles","trips"})
+    @JsonIgnoreProperties({"comments","roles","trips","citiesFavoris"})
     private UserDto organisateur;
 
     private Set<ParticipantDto> participants;
