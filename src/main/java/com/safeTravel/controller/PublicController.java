@@ -90,14 +90,14 @@ public class PublicController {
      */
     @GetMapping({"/city/all_average/{name}"})
     @ResponseStatus(HttpStatus.OK)
-    public HashMap getAverageByName(@PathVariable("name") String name) {
+    public HashMap getNotesByName(@PathVariable("name") String name) {
         HashMap<String, Object> response = new HashMap<>();
 
-        List<Double> ratings = cityService.getRatingAverageByName(name);
-        List<Double> meteo = cityService.getMeteoAverageByName(name);
+        List<Double> ratings = cityService.getUsersRatingsByName(name);
+        List<Double> meteo = cityService.getMeteoRatingsByName(name);
 
-        response.put("ratings", ratingAverageList);
-        response.put("meteo", meteoAverageList);
+        response.put("ratings", ratings);
+        response.put("meteo", meteo);
 
         logger.debug("City, getAverageByName() :{}", name);
         return response;
