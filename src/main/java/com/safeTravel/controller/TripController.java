@@ -1,5 +1,6 @@
 package com.safeTravel.controller;
 
+import com.safeTravel.dto.ParticipantDto;
 import com.safeTravel.dto.StepWithoutTripDto;
 import com.safeTravel.dto.TripDto;
 import com.safeTravel.dto.create.StepCreationDto;
@@ -113,7 +114,7 @@ public class TripController {
 
     @GetMapping({"/isParticipant/{tripId}"})
     @ResponseStatus(HttpStatus.OK)
-    public Boolean isParticipant(@RequestHeader("UtilisateurId") Long utilisateurId, @PathVariable("tripId") Long tripId) {
+    public ParticipantDto isParticipant(@RequestHeader("UtilisateurId") Long utilisateurId, @PathVariable("tripId") Long tripId) {
         if(utilisateurId == null) throw new AccessDeniedException("L'utilisateur n'est pas connecté");
         return this.tripService.isParticipant(utilisateurId, tripId);
     }

@@ -1,16 +1,19 @@
 package com.safeTravel.service.impl;
 
+import com.safeTravel.dto.ParticipantDto;
 import com.safeTravel.dto.StepWithoutTripDto;
 import com.safeTravel.dto.TripDto;
 import com.safeTravel.dto.create.StepCreationDto;
 import com.safeTravel.dto.create.TripCreationDto;
 import com.safeTravel.entity.*;
+import com.safeTravel.mapper.referentiel.ParticipantMapper;
 import com.safeTravel.mapper.referentiel.StepWithoutTripMapper;
 import com.safeTravel.mapper.referentiel.TripMapper;
 import com.safeTravel.repository.*;
 import com.safeTravel.service.TripService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
@@ -36,6 +39,8 @@ public class TripServiceImpl implements TripService {
     private StepRepository stepRepository;
     @Autowired
     private StepWithoutTripMapper stepWithoutTripMapper;
+    @Autowired
+    private ParticipantMapper participantMapper;
 
     /**
      * {@inheritDoc}
@@ -94,18 +99,21 @@ public class TripServiceImpl implements TripService {
     }
 
     @Override
-    public Boolean isParticipant(Long utilisateurId, Long tripId) {
+    public ParticipantDto isParticipant(Long utilisateurId, Long tripId) {
         Optional<User> user = this.userRepository.findById(utilisateurId);
         Optional<Trip> trip = this.tripRepository.findById(tripId);
 
         if(!user.isPresent() || !trip.isPresent()) throw new EntityNotFoundException("L'utilisateur ou le voyage n'existe pas");
 
-        if(user.get().getId().equals(trip.get().getOrganisateur().getId())) return false;
+        if(user.get().getId().equals(trip.get().getOrganisateur().getId())) throw new AccessDeniedException("L'organisateur ne peux pas être participant");
 
         Optional<Participant> participant = this.participantRepository.findByTripAndUser(trip.get(), user.get());
 
-        if(!participant.isPresent()) { return false; }
-        else return trip.get().getParticipants().contains(participant.get());
+        if(!participant.isPresent()) { throw new EntityNotFoundException("Le participant n'existe pas"); }
+        else {
+            if(trip.get().getParticipants().contains(participant.get())) return this.participantMapper.toDto(participant.get());
+            else throw new AccessDeniedException("L'utilisateur ne participas pas au voyage'");
+        }
     }
 
     /**
