@@ -8,7 +8,7 @@ public interface CityService extends ServiceShared<CityDto, Long> {
     CityDto getByName(String name);
     List<ReducedCityDto> getAllReducedCity();
     Double getRatingAverageByName(String name);
-    Double getMeteoAverageByName(String name);
+    Double getMeteoNoteByName(String name);
     List<NoteQueryDto> getUsersRatingsByName(String name);
     List<NoteQueryDto> getMeteoRatingsByName(String name);
     void createFavoris(Long cityId, Long userId);
