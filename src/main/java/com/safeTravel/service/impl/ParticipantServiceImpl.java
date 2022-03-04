@@ -1,6 +1,8 @@
 package com.safeTravel.service.impl;
 
 import com.safeTravel.dto.ParticipantDto;
+import com.safeTravel.dto.TripDto;
+import com.safeTravel.dto.TripQueryDto;
 import com.safeTravel.dto.create.ParticipantCreationDto;
 import com.safeTravel.dto.delete.ParticipantDeleteDto;
 import com.safeTravel.dto.update.ParticipantUpdateDto;
@@ -8,6 +10,7 @@ import com.safeTravel.entity.Participant;
 import com.safeTravel.entity.Trip;
 import com.safeTravel.entity.User;
 import com.safeTravel.mapper.referentiel.ParticipantMapper;
+import com.safeTravel.mapper.referentiel.TripMapper;
 import com.safeTravel.repository.ParticipantRepository;
 import com.safeTravel.repository.TripRepository;
 import com.safeTravel.repository.UserRepository;
@@ -34,6 +37,9 @@ public class ParticipantServiceImpl implements ParticipantService {
 
     @Autowired
     private TripRepository tripRepository;
+
+    @Autowired
+    private TripMapper tripMapper;
 
     @Override
     public List<ParticipantDto> getAll() {
@@ -112,5 +118,10 @@ public class ParticipantServiceImpl implements ParticipantService {
         if(!participantOptional.get().getTrip().getId().equals(tripOptional.get().getId())) throw new AccessDeniedException("Ce participant ne participe pas au trip indiqué");
 
         this.participantRepository.deleteById(participantOptional.get().getId());
+    }
+
+    @Override
+    public List<TripQueryDto> getTripsUserParticipate(Long userUid) {
+        return this.participantRepository.getTripsByUserId(userUid);
     }
 }

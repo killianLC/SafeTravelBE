@@ -7,8 +7,9 @@ import java.util.Set;
 
 @Getter
 @Setter
-@NoArgsConstructor
+@AllArgsConstructor
 public class TripDto {
+
     private Long id;
 
     private String description;

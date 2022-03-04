@@ -1,9 +1,6 @@
 package com.safeTravel.service.impl;
 
-import com.safeTravel.dto.CityClassementDto;
-import com.safeTravel.dto.CityDto;
-import com.safeTravel.dto.NoteDto;
-import com.safeTravel.dto.ReducedCityDto;
+import com.safeTravel.dto.*;
 import com.safeTravel.entity.*;
 import com.safeTravel.mapper.referentiel.CityMapper;
 import com.safeTravel.mapper.referentiel.ReducedCityMapper;
@@ -83,19 +80,20 @@ public class CityServiceImpl implements CityService {
             RestTemplate restTemplate = new RestTemplate();
             ResponseEntity<String> response = restTemplate.getForEntity("https://geo.api.gouv.fr/communes?nom=" + name + "&fields=nom,code,codesPostaux,codeDepartement,codeRegion,population&format=json&geometry=centre", String.class);
 
-            if(!response.getBody().contains("\"nom\":\""+name)) {
-                throw new EntityNotFoundException();
-            } else {
+            if(response.getBody().contains("\"nom\":\""+name)) {
                 City newCity = new City();
                 newCity.setName(name);
+
+                this.cityRepository.save(newCity);
 
                 List<Criterion> criterionList = this.criterionRepository.findAll();
                 criterionList.forEach((criterion) -> {
                     this.addIfNotExistNoteByCriterionAndCurrentDate(newCity, criterion, LocalDate.now());
                 });
 
-                this.cityRepository.save(newCity);
                 return cityMapper.toDto(newCity);
+            } else {
+                throw new EntityNotFoundException();
             }
         }
 
@@ -141,12 +139,12 @@ public class CityServiceImpl implements CityService {
     }
 
     @Override
-    public List<NoteDto> getUsersRatingsByName(String name) {
+    public List<NoteQueryDto> getUsersRatingsByName(String name) {
         return cityRepository.getUsersRatingsByName(name);
     }
 
     @Override
-    public List<NoteDto> getMeteoRatingsByName(String name) {
+    public List<NoteQueryDto> getMeteoRatingsByName(String name) {
         return cityRepository.getMeteoRatingsByName(name);
     }
 

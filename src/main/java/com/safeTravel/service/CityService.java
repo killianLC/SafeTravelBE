@@ -1,9 +1,6 @@
 package com.safeTravel.service;
 
-import com.safeTravel.dto.CityClassementDto;
-import com.safeTravel.dto.CityDto;
-import com.safeTravel.dto.NoteDto;
-import com.safeTravel.dto.ReducedCityDto;
+import com.safeTravel.dto.*;
 
 import java.util.List;
 
@@ -12,8 +9,8 @@ public interface CityService extends ServiceShared<CityDto, Long> {
     List<ReducedCityDto> getAllReducedCity();
     Double getRatingAverageByName(String name);
     Double getMeteoAverageByName(String name);
-    List<NoteDto> getUsersRatingsByName(String name);
-    List<NoteDto> getMeteoRatingsByName(String name);
+    List<NoteQueryDto> getUsersRatingsByName(String name);
+    List<NoteQueryDto> getMeteoRatingsByName(String name);
     void createFavoris(Long cityId, Long userId);
     void deleteFavoris(Long cityId, Long userId);
     Boolean isFavoris(Long cityId, Long userId);

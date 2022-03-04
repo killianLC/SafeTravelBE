@@ -2,6 +2,8 @@ package com.safeTravel.controller;
 
 import com.safeTravel.dto.NoteDto;
 import com.safeTravel.dto.ParticipantDto;
+import com.safeTravel.dto.TripDto;
+import com.safeTravel.dto.TripQueryDto;
 import com.safeTravel.dto.create.ParticipantCreationDto;
 import com.safeTravel.dto.delete.ParticipantDeleteDto;
 import com.safeTravel.dto.update.ParticipantUpdateDto;
@@ -52,4 +54,9 @@ public class ParticipantController {
         this.participantService.acceptParticipant(participantUpdateDto);
     }
 
+    @GetMapping("/user/{userId}/trips")
+    @ResponseStatus(HttpStatus.OK)
+    public List<TripQueryDto> getTripsUserParticipate(@PathVariable Long userId) {
+        return this.participantService.getTripsUserParticipate(userId);
+    }
 }

@@ -1,9 +1,11 @@
 package com.safeTravel.controller;
 
-import com.safeTravel.dto.CityClassementDto;
-import com.safeTravel.dto.CityDto;
-import com.safeTravel.dto.NoteDto;
-import com.safeTravel.dto.ReducedCityDto;
+import com.safeTravel.dto.*;
+import com.safeTravel.entity.City;
+import com.safeTravel.entity.Note;
+import com.safeTravel.mapper.referentiel.CityMapper;
+import com.safeTravel.repository.CityRepository;
+import com.safeTravel.repository.RoleRepository;
 import com.safeTravel.service.CityService;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
@@ -22,6 +24,12 @@ import java.util.List;
 @RequestMapping({"/public"})
 public class PublicController {
     private static final Logger logger = LoggerFactory.getLogger(PublicController.class);
+
+    @Autowired
+    CityRepository cityRepository;
+
+    @Autowired
+    private CityMapper cityMapper;
 
     @Autowired
     private CityService cityService;
@@ -53,15 +61,7 @@ public class PublicController {
     @GetMapping({"/city/{name}"})
     @ResponseStatus(HttpStatus.OK)
     public CityDto getByName(@PathVariable("name") String name) {
-        CityDto city = new CityDto();
-        try {
-            city = cityService.getByName(name);
-        } catch (EntityNotFoundException e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
-        } catch (Exception e) {
-            logger.debug(e.getMessage());
-        }
-        return city;
+        return cityService.getByName(name);
     }
 
     /**
@@ -94,8 +94,8 @@ public class PublicController {
     public HashMap getNotesByName(@PathVariable("name") String name) {
         HashMap<String, Object> response = new HashMap<>();
 
-        List<NoteDto> ratings = cityService.getUsersRatingsByName(name);
-        List<NoteDto> meteo = cityService.getMeteoRatingsByName(name);
+        List<NoteQueryDto> ratings = cityService.getUsersRatingsByName(name);
+        List<NoteQueryDto> meteo = cityService.getMeteoRatingsByName(name);
 
         response.put("ratings", ratings);
         response.put("meteo", meteo);
