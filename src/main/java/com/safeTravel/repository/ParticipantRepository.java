@@ -19,6 +19,6 @@ public interface ParticipantRepository extends JpaRepository<Participant, Long> 
     List<Participant> findAllByTrip(Trip trip);
 
     @Transactional
-    @Query(value="SELECT new com.safeTravel.dto.TripQueryDto(trip.id, trip.description) FROM User user, Trip trip, Participant participant WHERE user.id = :userUid AND user.id = participant.user.id AND trip.organisateur.id != :userUid")
+    @Query(value="SELECT new com.safeTravel.dto.TripQueryDto(trip.id, trip.description) FROM User user, Trip trip, Participant participant WHERE user.id = :userUid AND user.id = participant.user.id AND trip.id = participant.trip.id AND trip.organisateur.id != :userUid")
     List<TripQueryDto> getTripsByUserId(@Param("userUid") Long userUid);
 }
