@@ -61,14 +61,7 @@ public class PublicController {
     @GetMapping({"/city/{name}"})
     @ResponseStatus(HttpStatus.OK)
     public CityDto getByName(@PathVariable("name") String name) {
-        City city = new City();
-        try {
-            return cityService.getByName(name);
-        } catch (Exception e) {
-            city.setName(name);
-            cityRepository.save(city);
-        }
-        return cityMapper.toDto(city);
+        return cityService.getByName(name);
     }
 
     /**

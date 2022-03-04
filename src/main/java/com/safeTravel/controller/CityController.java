@@ -2,6 +2,9 @@ package com.safeTravel.controller;
 
 import com.safeTravel.dto.CityDto;
 import com.safeTravel.dto.ReducedCityDto;
+import com.safeTravel.entity.City;
+import com.safeTravel.mapper.referentiel.CityMapper;
+import com.safeTravel.repository.CityRepository;
 import com.safeTravel.service.CityService;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
@@ -22,7 +25,8 @@ import java.util.List;
 public class CityController {
     private static final Logger logger = LoggerFactory.getLogger(CityController.class);
 
-    private final CityService cityService;
+    @Autowired
+    CityService cityService;
 
     @Autowired
     public CityController(CityService cityService) {
@@ -50,16 +54,7 @@ public class CityController {
     @GetMapping({"/{name}"})
     @ResponseStatus(HttpStatus.OK)
     public CityDto getByName(@PathVariable("name") String name) {
-        CityDto city = new CityDto();
-        try {
-            city = cityService.getByName(name);
-        } catch (EntityNotFoundException e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
-        } catch (Exception e) {
-            log.debug(e.getMessage());
-        }
-
-        return city;
+        return cityService.getByName(name);
     }
 
     /**

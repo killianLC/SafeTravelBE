@@ -80,19 +80,20 @@ public class CityServiceImpl implements CityService {
             RestTemplate restTemplate = new RestTemplate();
             ResponseEntity<String> response = restTemplate.getForEntity("https://geo.api.gouv.fr/communes?nom=" + name + "&fields=nom,code,codesPostaux,codeDepartement,codeRegion,population&format=json&geometry=centre", String.class);
 
-            if(!response.getBody().contains("\"nom\":\""+name)) {
-                throw new EntityNotFoundException();
-            } else {
+            if(response.getBody().contains("\"nom\":\""+name)) {
                 City newCity = new City();
                 newCity.setName(name);
+
+                this.cityRepository.save(newCity);
 
                 List<Criterion> criterionList = this.criterionRepository.findAll();
                 criterionList.forEach((criterion) -> {
                     this.addIfNotExistNoteByCriterionAndCurrentDate(newCity, criterion, LocalDate.now());
                 });
 
-                this.cityRepository.save(newCity);
                 return cityMapper.toDto(newCity);
+            } else {
+                throw new EntityNotFoundException();
             }
         }
 
