@@ -120,7 +120,8 @@ public class CityServiceImpl implements CityService {
         }
         else {
             Double newNote = this.calculateNoteForCriterionAndCity(criterion, city);
-            if(note.get().getNote() != newNote) {
+            // BOUCHON
+            if(note.get().getNote() != newNote && !note.get().getCriterion().getType().equals("METEO_NOTES")) {
                 note.get().setNote(newNote);
                 this.noteRepository.save(note.get());
             }
@@ -128,7 +129,6 @@ public class CityServiceImpl implements CityService {
     }
 
     public Double calculateNoteForCriterionAndCity(Criterion criterion, City city) {
-
         switch(criterion.getType()) {
             case "USER_NOTES": return this.getRatingAverageByName(city.getName());
             case "METEO_NOTES": return this.getMeteoNoteByName(city.getName());
