@@ -75,7 +75,7 @@ public class PublicController {
         HashMap<String, Object> response = new HashMap<>();
 
         Double ratingAverage = cityService.getRatingAverageByName(name);
-        Double meteoAverage = cityService.getMeteoAverageByName(name);
+        Double meteoAverage = cityService.getMeteoNoteByName(name);
 
         response.put("rating_average", ratingAverage);
         response.put("meteo_average", meteoAverage);

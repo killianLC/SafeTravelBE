@@ -19,6 +19,7 @@ import javax.persistence.EntityNotFoundException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
 
 @Slf4j
@@ -130,7 +131,7 @@ public class CityServiceImpl implements CityService {
 
         switch(criterion.getType()) {
             case "USER_NOTES": return this.getRatingAverageByName(city.getName());
-            case "METEO_NOTES": return this.getMeteoAverageByName(city.getName());
+            case "METEO_NOTES": return this.getMeteoNoteByName(city.getName());
             default: return null;
         }
     }
@@ -141,8 +142,11 @@ public class CityServiceImpl implements CityService {
     }
 
     @Override
-    public Double getMeteoAverageByName(String name) {
-        return cityRepository.getMeteoAverageByName(name);
+    public Double getMeteoNoteByName(String name) {
+        Random r = new Random();
+        double randomValue = 1 + (5 - 2) * r.nextDouble();
+
+        return randomValue;
     }
 
     @Override
