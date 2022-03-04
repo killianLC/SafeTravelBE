@@ -144,7 +144,7 @@ public class CityServiceImpl implements CityService {
     @Override
     public Double getMeteoNoteByName(String name) {
         Random r = new Random();
-        double randomValue = r.nextInt(5);
+        double randomValue = r.nextInt(4) + 1;
 
         return randomValue;
     }
