@@ -40,6 +40,12 @@ public class PublicController {
         return cityService.getTop10ByNotesDesc();
     }
 
+    @GetMapping({"/city/globalnote/{name}"})
+    @ResponseStatus(HttpStatus.OK)
+    public Double getGlobalNote(@PathVariable String name) {
+        return cityService.getGlobalNote(name);
+    }
+
     /**
      * Endpoint /cities type GET
      *

@@ -30,4 +30,8 @@ public interface CityRepository extends JpaRepository<City, Long> {
     @Transactional
     @Query(value = "SELECT new com.safeTravel.dto.CityClassementDto(c.id, c.name, ROUND(AVG(n.note),1) as note) FROM City c, Note n WHERE c.id = n.city.id AND n.note != NULL GROUP BY c.id ORDER BY note DESC")
     List<CityClassementDto> findTop10ByOrderByNotesDesc(PageRequest pageable);
+
+    @Transactional
+    @Query(value = "SELECT ROUND(AVG(note.note), 1) as note FROM city, note WHERE city_id = note.city_id AND city.name = :name", nativeQuery = true)
+    Double getGlobalNote(@Param("name") String name);
 }

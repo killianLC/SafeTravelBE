@@ -89,7 +89,7 @@ public class CityServiceImpl implements CityService {
 
                 List<Criterion> criterionList = this.criterionRepository.findAll();
                 criterionList.forEach((criterion) -> {
-                    this.addIfNotExistNoteByCriterionAndCurrentDate(newCity, criterion, LocalDate.now());
+                    this.addIfNotExistNoteByCriterionAndCurrentDate(newCity, criterion, LocalDate.now().minusDays(1));
                 });
 
                 return cityMapper.toDto(newCity);
@@ -206,5 +206,10 @@ public class CityServiceImpl implements CityService {
         if(!user.isPresent()) throw new EntityNotFoundException("L'utilisateur n'existe pas");
 
         return user.get().getCitiesFavoris().contains(city.get());
+    }
+
+    @Override
+    public Double getGlobalNote(String name) {
+        return this.cityRepository.getGlobalNote(name);
     }
 }
