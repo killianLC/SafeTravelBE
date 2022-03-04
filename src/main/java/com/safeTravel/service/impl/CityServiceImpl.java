@@ -119,7 +119,7 @@ public class CityServiceImpl implements CityService {
         }
         else {
             Double newNote = this.calculateNoteForCriterionAndCity(criterion, city);
-            if(!note.get().getNote().equals(newNote)) {
+            if(note.get().getNote() != newNote) {
                 note.get().setNote(newNote);
                 this.noteRepository.save(note.get());
             }
