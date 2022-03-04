@@ -7,6 +7,7 @@ import com.safeTravel.mapper.referentiel.CityMapper;
 import com.safeTravel.repository.CityRepository;
 import com.safeTravel.repository.RoleRepository;
 import com.safeTravel.service.CityService;
+import com.safeTravel.service.NoteService;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.persistence.EntityNotFoundException;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 
@@ -29,10 +31,13 @@ public class PublicController {
     CityRepository cityRepository;
 
     @Autowired
-    private CityMapper cityMapper;
+    CityMapper cityMapper;
 
     @Autowired
-    private CityService cityService;
+    CityService cityService;
+
+    @Autowired
+    NoteService noteService;
 
     @GetMapping({"/top10"})
     @ResponseStatus(HttpStatus.OK)
@@ -85,7 +90,7 @@ public class PublicController {
     }
 
     /**
-     * Endpoint /city/notes/{nom} type GET
+     * Endpoint /city/{name}/notes type GET
      *
      * @return Double
      */
@@ -102,5 +107,17 @@ public class PublicController {
 
         logger.debug("City, getAverageByName() :{}", name);
         return response;
+    }
+
+    /**
+     * Endpoint /city/{nom}/meteo type POST
+     *
+     * @return Double
+     */
+    @PostMapping({"/city/{name}/meteo/{note}"})
+    @ResponseStatus(HttpStatus.OK)
+    public void createMeteoNote(@PathVariable("name") String name, @PathVariable("note") double note) {
+        City city = cityMapper.toEntity(cityService.getByName(name));
+        noteService.addMeteoNote(city, note);
     }
 }

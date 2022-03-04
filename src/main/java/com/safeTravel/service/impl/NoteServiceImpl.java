@@ -5,6 +5,7 @@ import com.safeTravel.entity.City;
 import com.safeTravel.entity.Criterion;
 import com.safeTravel.entity.Note;
 import com.safeTravel.mapper.referentiel.NoteMapper;
+import com.safeTravel.repository.CriterionRepository;
 import com.safeTravel.repository.NoteRepository;
 import com.safeTravel.service.NoteService;
 import lombok.extern.slf4j.Slf4j;
@@ -21,9 +22,13 @@ import java.util.Optional;
 @Service
 public class NoteServiceImpl implements NoteService {
     @Autowired
-    private NoteRepository noteRepository;
+    CriterionRepository criterionRepository;
+
     @Autowired
-    private NoteMapper noteMapper;
+    NoteMapper noteMapper;
+
+    @Autowired
+    NoteRepository noteRepository;
 
     /**
      * {@inheritDoc}
@@ -58,5 +63,20 @@ public class NoteServiceImpl implements NoteService {
      */
     public void deleteById(Long id) {
         this.noteRepository.deleteById(id);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public void addMeteoNote(City city, double note) {
+        Criterion criterion = criterionRepository.findOneByType("METEO_NOTES");
+
+        Note meteoNote = new Note();
+        meteoNote.setCity(city);
+        meteoNote.setNote(note);
+        meteoNote.setCriterion(criterion);
+        meteoNote.setDate(LocalDate.now());
+
+        noteRepository.save(meteoNote);
     }
 }
